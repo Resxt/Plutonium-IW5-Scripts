@@ -1,6 +1,6 @@
 # Replace Weapon On Spawn
 
-This can easily be modified to always give a certain weapon or only give it when the player has a certain weapon etc.
+This can easily be modified to always give a certain weapon or only give it when the player has a certain weapon etc.  
 This is useful to add ported weapons like the Intervention to your default classes until Plutonium adds the possibility to do it directly in dsr files.
 
 ## replace_rsass_with_intervention.gsc
