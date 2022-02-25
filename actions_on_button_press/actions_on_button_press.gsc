@@ -27,8 +27,8 @@ OnPlayerSpawn(player)
 {
 	self endon("disconnect");
 
-     for(;;)
-     {	
+	for(;;)
+	{	
 		self waittill("spawned_player");
 		wait 1;
 
@@ -45,8 +45,6 @@ OnCameraToggleButtonPressed(button)
     while(1)
     {
 		self waittill("third_person_button");
-
-		//self setDepthOfField( 0, 0, 512, 512, 4, 0 );
 
 		if (GetDvar("camera_thirdPerson") == "0")
 		{
