@@ -1,6 +1,6 @@
 # Actions On Button Press
 
-These scripts allow players on the server to press a button (displayed on screen) to trigger a function
+These scripts allow players on the server to press a button (displayed on screen) to trigger a function.  
 Note that if you combine several scripts you will have to change the texts positions so that they don't overlap by changing the last value in `setPoint()`  
 You can also change the text's position in `setPoint()` and the size and font type in `createServerFontString()`  
 
