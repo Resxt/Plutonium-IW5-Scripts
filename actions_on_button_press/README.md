@@ -1,17 +1,11 @@
 # Actions On Button Press
 
-This script shows how you can execute functions and change dvars for a player when that player presses a certain button while showing him instructions on his screen using the key defined in his game.
+These scripts allow players on the server to press a button (displayed on screen) to trigger a function
+Note that if you combine several scripts you will have to change the texts positions so that they don't overlap by changing the last value in `setPoint()`  
+You can also change the text's position in `setPoint()` and the size and font type in `createServerFontString()`  
 
-* The first button  lets the player toggle the `camera_thirdPerson` dvar (used to play in third person while keeping the crosshair on and is also better/more configurable than `cg_thirdPerson` in my opinion)
-Note that `camera_thirdPerson` is a special case and needs to be changed with `SetDynamicDvar()` but in most cases like with `cg_thirdPerson` you'd use `SetDvar()` instead.
-
-* The second button lets the player suicide using the `Suicide()` function.
-
-If you use `+melee` and the player's melee key is set to V it'll show V on his screen, if he uses another key it'll show his key.  
-If you want to use another button simply change `level.third_person_button` and/or `level.suicide_button` values and it will update the button pressed to start the function and the text displayed on the player's screen.
-
-I used actionslot 6 and 7 because (to my knowledge) they are not used by anything else in the game  
-Here is a non-exhaustive list of buttons you can use
+Changing the button in `Init()` will change both the button displayed on screen and the button used to trigger the function.  
+Here is a non-exhaustive list of buttons you can use  
 ```
 "+usereload"
 "weapnext"
@@ -31,3 +25,13 @@ Here is a non-exhaustive list of buttons you can use
 "+stance"
 "+breathe_sprint"
 ```
+
+## suicide_on_button_press.gsc
+
+The player dies when pressing the button
+
+## camera_switch_vote_on_button_press.gsc
+
+Allows the players to toggle their vote to change the `camera_thirdPerson` dvar on the server (players vote no by default)  
+When everyone votes yes the server changes the dvar and resets the vote counts.  
+Bots are ignored for the votes.
