@@ -33,5 +33,6 @@ The player dies when pressing the button
 ## camera_switch_vote_on_button_press.gsc
 
 Allows the players to toggle their vote to change the `camera_thirdPerson` dvar on the server (players vote no by default)  
-When everyone votes yes the server changes the dvar and resets the vote counts.  
+When enough players vote yes the server changes the dvar and resets the vote counts.  
+The amount of votes required is more than 50% of the players: 1/1 | 2/2 | 3/4 | 3/5 | 4/6 etc.  
 Bots are ignored for the votes.

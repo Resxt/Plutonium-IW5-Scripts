@@ -94,9 +94,21 @@ DisplayVoteCount()
 			}
 		}
 
-		level.camera_switch_vote_count_text setText("^1Votes to switch camera: " + yes_votes + "/" + human_players.size);
+		votes_required = 0;
 
-		if (yes_votes == human_players.size && human_players.size > 0)
+		// Votes required = more than 50% of the players: 1/1 | 2/2 | 3/4 | 3/5 | 4/6 etc.
+		if (human_players.size % 2 == 1)
+		{	
+			votes_required = (human_players.size / 2 + 0.5);
+		}
+		else if (human_players.size % 2 == 0)
+		{
+			votes_required = (human_players.size / 2 + 1);
+		}
+
+		level.camera_switch_vote_count_text setText("^1Votes to switch camera: " + yes_votes + "/" + votes_required);
+
+		if (yes_votes >= votes_required && human_players.size > 0)
 		{
 			// Logic here
 			setDvar( "camera_thirdPerson", !getDvarInt( "camera_thirdPerson" ) );
