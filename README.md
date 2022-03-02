@@ -35,6 +35,6 @@ Make sure to put `All` or `Any` for the file type and to add `.gsc` at the end o
 
 [Follow the instructions in the documentation](https://plutonium.pw/docs/modding/loading-mods/#iw5)
 
-Simply drop a `.gsc` file inside `%localappdata\Plutonium\storage\iw5\scripts`.
+Simply drop a `.gsc` file inside `%localappdata%\Plutonium\storage\iw5\scripts`.
 
 Note that you can use `map_restart` in the [console](https://plutonium.pw/docs/opening-console/) to quickly restart your current game and reload scripts.
