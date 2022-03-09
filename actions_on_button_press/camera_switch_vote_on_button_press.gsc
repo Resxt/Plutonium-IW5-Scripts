@@ -76,22 +76,20 @@ DisplayVoteCount()
 
 		foreach (player in level.players)
 		{
+			if (isDefined(player.pers["isBot"]))
+			{
+				if (player.pers["isBot"])
+				{
+					break;
+				}
+			}
+
 			if (player.pers["camera_switch_vote"])
 			{
 				yes_votes++;
 			}
 
-			if (!isDefined(player.pers["isBot"]))
-			{
-				human_players[human_players.size] = player;
-			}
-			else
-			{
-				if (!player.pers["isBot"])
-				{
-					human_players[human_players.size] = player;
-				}
-			}
+			human_players[human_players.size] = player;
 		}
 
 		votes_required = 0;
