@@ -14,7 +14,12 @@ Main()
 
 Init()
 {
+	kills_limit = 120; // Override score limit
+	time_limit = 10; // Override time limit
+
 	level.killstreakSpawnShield = 0; // Disable anti killstreak protection on player spawn
+
+	SetLimits(kills_limit, time_limit); // This is optional
 		
 	level thread OnPlayerConnect();
 }
@@ -113,6 +118,33 @@ WeaponIsValid(weapon)
 			return true;
 		default:
 			return false;
+	}
+}
+
+SetLimits(kills_limit, time_limit)
+{
+	score_multiplier = 0;
+
+	switch (level.gameType)
+	{
+		case "dm":
+			score_multiplier = 50;
+			break;
+		case "war":
+			score_multiplier = 100;
+			break;
+		default:
+			score_multiplier = 50;
+			break;
+	}
+
+	SetDvar("scr_" + level.gameType + "_scorelimit", kills_limit * score_multiplier);
+	SetDvar("scorelimit", kills_limit * score_multiplier);
+
+	if (time_limit != undefined)
+	{
+		SetDvar("scr_" + level.gameType + "_timelimit", time_limit);
+		SetDvar("timelimit", time_limit);
 	}
 }
 
