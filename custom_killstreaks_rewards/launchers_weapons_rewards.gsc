@@ -14,8 +14,9 @@ Main()
 
 Init()
 {
-	level thread OnPlayerConnect();
 	level.killstreakSpawnShield = 0; // Disable anti killstreak protection on player spawn
+		
+	level thread OnPlayerConnect();
 }
 
 OnPlayerConnect()
