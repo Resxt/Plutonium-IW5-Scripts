@@ -34,8 +34,6 @@ OnPlayerSpawned()
      {
 		self waittill("spawned_player");
 
-		print(self.name);
-
 		if (isDefined(self.pers["isBot"]))
 		{
 			if (self.pers["isBot"])
@@ -48,15 +46,6 @@ OnPlayerSpawned()
 	}
 }
 
-ReplaceWeapon(new_weapon)
-{
-	self TakeAllWeapons();
-	self GiveWeapon(new_weapon);
-	self GiveWeapon("semtex_mp"); // Found in dsr files
-	self GiveWeapon("flare_mp"); // Tactical insertion - found in common_mp.ff
-	self SetSpawnWeapon(new_weapon); // This gives the weapon without playing the animation
-}
-
 WeaponReward()
 {
 	self endon ("disconnect");
@@ -64,11 +53,14 @@ WeaponReward()
 
 	spawn_weapon = self GetCurrentWeapon();
 
-	while(true)
+	if (WeaponIsValid(spawn_weapon))
 	{
-		weapon_rewards = [[5, "m320_mp"], [10, "rpg_mp"], [15, "ac130_40mm_mp"], [25, "ac130_105mm_mp"], [35, spawn_weapon]]; // [kills_required, weapon_reward]
-		CheckWeaponReward(weapon_rewards);
-		wait 0.01;
+		while(true)
+		{
+			weapon_rewards = [[5, "m320_mp"], [10, "rpg_mp"], [15, "ac130_40mm_mp"], [25, "ac130_105mm_mp"], [35, spawn_weapon]]; // [kills_required, weapon_reward]
+			CheckWeaponReward(weapon_rewards);
+			wait 0.01;
+		}
 	}
 }
 
@@ -92,6 +84,34 @@ CheckWeaponReward(weapon_rewards)
 			ReplaceWeapon(next_reward);
 			break;
 		}
+	}
+}
+
+ReplaceWeapon(new_weapon)
+{
+	self TakeAllWeapons();
+	self GiveWeapon(new_weapon);
+	self GiveWeapon("semtex_mp"); // Found in dsr files
+	self GiveWeapon("flare_mp"); // Tactical insertion - found in common_mp.ff
+	self SetSpawnWeapon(new_weapon); // This gives the weapon without playing the animation
+}
+
+WeaponIsValid(weapon)
+{
+	switch (weapon)
+	{
+		case "iw5_smaw_mp":
+			return true;
+		case "rpg_mp":
+			return true;
+		case "m320_mp":
+			return true;
+		case "xm25_mp":
+			return true;
+		case "javelin_mp":
+			return true;
+		default:
+			return false;
 	}
 }
 

@@ -5,6 +5,7 @@ Scripts that give the players different weapons or perks depending on their curr
 ## launchers_weapons_rewards.gsc
 
 Gives the player a new weapon every time he reaches a new tier.  
+`WeaponIsValid()` ensures that the rewards are only given if the player's spawn weapon is a launcher.  
 If the player reaches the last tier the loop restarts allowing players to get tiers several time per life if they ever get enough kills.  
 For example with this script if you get 50 kills in a row you would get the AC130 105mm two times.  
 This is how the script is configured
