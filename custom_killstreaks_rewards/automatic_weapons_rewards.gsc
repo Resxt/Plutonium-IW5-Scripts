@@ -187,23 +187,32 @@ WeaponReward()
 	{
 		while(true)
 		{
-			CheckWeaponReward(level.weapon_rewards);
+			CheckWeaponReward(level.weapon_rewards, spawn_weapon);
 			wait 0.01;
 		}
 	}
 }
 
-CheckWeaponReward(weapon_rewards)
+CheckWeaponReward(weapon_rewards, spawn_weapon)
 {
 	player_kills = self.pers["kills"];
 
 	for (i = 0; i < weapon_rewards.size; i++)
 	{
-		next_reward = weapon_rewards[i][1];
-		if (player_kills >= weapon_rewards[i][0] && player_kills < weapon_rewards[i+1][0] && self GetCurrentWeapon() != next_reward)
+		if (player_kills >= weapon_rewards[i][0] && player_kills < weapon_rewards[i+1][0])
 		{
-			ReplaceWeapon(next_reward);
-			break;
+			if (self GetCurrentWeapon() == spawn_weapon)
+			{
+				self.pers["weapons_reward_tier"] = weapon_rewards[i][0];
+				ReplaceWeapon(weapon_rewards[i][1]);
+				break;
+			}
+			else if (i > 0 && self GetCurrentWeapon() == weapon_rewards[i-1][1])
+			{
+				self.pers["weapons_reward_tier"] = weapon_rewards[i][0];
+				ReplaceWeapon(weapon_rewards[i][1]);
+				break;
+			}
 		}
 	}
 }
