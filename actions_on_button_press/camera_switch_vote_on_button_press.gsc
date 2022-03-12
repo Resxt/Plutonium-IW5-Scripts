@@ -116,11 +116,11 @@ DisplayVoteCount()
 			{
 				if (getDvarInt( "camera_thirdPerson" ) == 0)
 				{
-					CustomPrintLn("Everyone voted to switch to 1st person");
+					CustomPrintLn("More than half of the players voted to switch to 1st person");
 				}
 				else
 				{
-					CustomPrintLn("Everyone voted to switch to 3rd person");
+					CustomPrintLn("More than half of the players voted to switch to 3rd person");
 				}
 			}
 			
