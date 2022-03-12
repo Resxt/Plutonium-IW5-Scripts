@@ -9,20 +9,20 @@ OnPlayerConnected()
 {
     for(;;)
     {
-        level waittill("connected", player);  
-
+        level waittill("connected", player);
+          
         // Don't thread DisplayPlayerKillstreak() on bots
         if (isDefined(player.pers["isBot"]))
-		{
-			if (player.pers["isBot"])
-			{
-				continue; // skip
-			}
-		}
+        {
+            if (player.pers["isBot"])
+            {
+                continue; // skip
+            }
+        }
 
         player thread DisplayPlayerKillstreak();
     }
-}	
+}
 
 
 DisplayPlayerKillstreak()
