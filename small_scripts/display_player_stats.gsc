@@ -16,13 +16,13 @@ OnPlayerConnected()
 		{
 			if (player.pers["isBot"])
 			{
-				return;
+				continue; // skip
 			}
 		}
 
         player thread DisplayPlayerKillstreak();
     }
-}
+}	
 
 
 DisplayPlayerKillstreak()
@@ -30,13 +30,28 @@ DisplayPlayerKillstreak()
     self endon ("disconnect");
     level endon("game_ended");
 
-    self.stats_text = createFontString( "Objective", 0.65 );
-    self.stats_text setPoint( "CENTER", "TOP", "CENTER", 7.5 );
+    self.killstreak_text = createFontString( "Objective", 0.65 );
+    self.killstreak_text setPoint( "CENTER", "TOP", "CENTER", 7.5 );
+    self.killstreak_text.label = &"^1 | KILLSTREAK: ";
+
+    self.kills_text = createFontString( "Objective", 0.65 );
+    self.kills_text setPoint( -49, "TOP", -49, 7.5 );
+    self.kills_text.label = &"^1KILLS: ";
+
+    self.deaths_text = createFontString( "Objective", 0.65 );
+    self.deaths_text setPoint( 56.5, "TOP", 56.5, 7.5 );
+    self.deaths_text.label = &"^1 | DEATHS: ";
 
     while(true)
     {
-        self.playerstreak = self.pers["cur_kill_streak"];
-        self.stats_text setText("^1KILLSTREAK: " + self.pers["cur_kill_streak"] + " | KILLS: " + self.pers["kills"] + " | DEATHS: " + self.pers["deaths"]);
+        if(self.playerstreak != self.pers["cur_kill_streak"])
+        {
+            self.playerstreak = self.pers["cur_kill_streak"];
+            self.killstreak_text setValue(self.pers["cur_kill_streak"]);
+        }
+
+        self.kills_text setValue(self.pers["kills"]);
+        self.deaths_text setValue(self.pers["deaths"]);
 
         wait 0.01;
     }
