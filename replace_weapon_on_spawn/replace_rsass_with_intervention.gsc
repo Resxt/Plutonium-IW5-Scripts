@@ -17,7 +17,7 @@ OnPlayerSpawned()
 	self endon("disconnect");
      for(;;)
      {
-		self waittill("spawned_player");
+		self waittill("changed_kit");
 		current_weapon = self GetCurrentWeapon();
 		self thread DoWeaponCheck(current_weapon);
 	}
