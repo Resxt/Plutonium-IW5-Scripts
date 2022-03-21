@@ -48,11 +48,11 @@ OnCameraSwitchVoteButtonPressed(button)
 		self.pers["camera_switch_vote"] = !self.pers["camera_switch_vote"];
 		if (self.pers["camera_switch_vote"])
 		{
-			CustomPrintLn("You voted to switch the camera");
+			CustomPrintLn(self.name + " voted to switch the camera");
 		}
 		else
 		{
-			CustomPrintLn("You removed your vote to switch the camera");
+			CustomPrintLn(self.name + " removed his vote to switch the camera");
 		}
 	} 
 }
@@ -76,20 +76,22 @@ DisplayVoteCount()
 
 		foreach (player in level.players)
 		{
-			if (isDefined(player.pers["isBot"]))
-			{
-				if (player.pers["isBot"])
-				{
-					break;
-				}
-			}
-
 			if (player.pers["camera_switch_vote"])
 			{
 				yes_votes++;
 			}
 
-			human_players[human_players.size] = player;
+			if (!isDefined(player.pers["isBot"]))
+			{
+				human_players[human_players.size] = player;
+			}
+			else
+			{
+				if (!player.pers["isBot"])
+				{
+					human_players[human_players.size] = player;
+				}
+			}
 		}
 
 		votes_required = 0;
@@ -116,11 +118,11 @@ DisplayVoteCount()
 			{
 				if (getDvarInt( "camera_thirdPerson" ) == 0)
 				{
-					CustomPrintLn("More than half of the players voted to switch to 1st person");
+					CustomPrintLn("Switching to 1st person (+50% votes)");
 				}
 				else
 				{
-					CustomPrintLn("More than half of the players voted to switch to 3rd person");
+					CustomPrintLn("Switching to 3rd person (+50% votes)");
 				}
 			}
 			
