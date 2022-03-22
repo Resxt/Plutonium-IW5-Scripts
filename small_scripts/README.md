@@ -21,6 +21,11 @@ Display the player's killstreak, total kills and deaths on top of the screen
   ![image](images/display_player_stats.png)
 </details>
 
+## hardcore_tweaks.gsc
+
+The hardcore mode replaces some game functionalities like enabling friendly fire or disabling killcams.  
+With this script you override the tweaks the hardcore mode brings.
+
 ## kill_stuck_bots.gsc
 
 This is a temporary solution to inactive bots or bots stuck in corners on custom maps.  
