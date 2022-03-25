@@ -21,6 +21,10 @@ Display the player's killstreak, total kills and deaths on top of the screen
   ![image](images/display_player_stats.png)
 </details>
 
+## get_player_guid.gsc
+
+Print the GUID of a player in the console whenever he connects and whenever he chooses/changes class.
+
 ## hardcore_tweaks.gsc
 
 The hardcore mode replaces some game functionalities like enabling friendly fire or disabling killcams.  
