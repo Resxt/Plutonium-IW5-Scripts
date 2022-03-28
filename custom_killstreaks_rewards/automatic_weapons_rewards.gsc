@@ -109,7 +109,7 @@ SetLimits(kills_limit, time_limit)
     SetDvar("scr_" + level.gameType + "_scorelimit", kills_limit * score_multiplier);
 	SetDvar("scorelimit", kills_limit * score_multiplier);
 
-	if (time_limit != undefined)
+	if (IsDefined(time_limit))
 	{
 		SetDvar("scr_" + level.gameType + "_timelimit", time_limit);
 		SetDvar("timelimit", time_limit);
@@ -120,7 +120,7 @@ SetLimits(kills_limit, time_limit)
 InitWeaponRewards(kills_limit, weapon_switch_kills, last_weapon)
 {
 	condition = kills_limit;
-	if (last_weapon != undefined)
+	if (IsDefined(last_weapon))
 	{
 		condition = kills_limit - weapon_switch_kills;
 	}
@@ -162,7 +162,7 @@ InitWeaponRewards(kills_limit, weapon_switch_kills, last_weapon)
 		}
 	}
 
-	if (last_weapon != undefined)
+	if (IsDefined(last_weapon))
 	{
 		level.weapon_rewards[level.weapon_rewards.size] = [kills_limit - weapon_switch_kills, last_weapon];
 
