@@ -141,7 +141,7 @@ SetLimits(kills_limit, time_limit)
 	SetDvar("scr_" + level.gameType + "_scorelimit", kills_limit * score_multiplier);
 	SetDvar("scorelimit", kills_limit * score_multiplier);
 
-	if (time_limit != undefined)
+	if (IsDefined(time_limit))
 	{
 		SetDvar("scr_" + level.gameType + "_timelimit", time_limit);
 		SetDvar("timelimit", time_limit);
