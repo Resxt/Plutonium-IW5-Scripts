@@ -42,7 +42,7 @@ This is a script that kills players when they are under the map.
 Some maps don't have a script to kill players under the map and they can exploit it to kill players while being under the map.  
 Go under the map on the barrier and check the console to get the value to check.  
 Then open the in-game console and type `mapname` to get the map name.  
-Finally simply add a to the `switch (map_name)` with the `mapname` value for the case and the `self.origin[2]` value as the returned value.
+Finally simply add a case to the `switch (map_name)` with the `mapname` value as the case and the `self.origin[2]` value as the returned value.
 
 
 ## kill_stuck_bots.gsc
