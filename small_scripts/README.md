@@ -36,6 +36,15 @@ You can find the list of perks and pro perks in [perktable.csv](https://github.c
 The hardcore mode replaces some game functionalities like enabling friendly fire or disabling killcams.  
 With this script you can override the tweaks the hardcore mode brings.
 
+## kill_players_under_map.gsc
+
+This is a script to kill players when they are under the map.  
+Some maps don't have a script to kill players under the map and they can exploit it to kill players while being under the map.  
+Go under the map on the barrier and check the console to get the value to check.  
+Then open the in-game console and type `mapname` to get the map name.  
+Finally simply add a to the `switch (map_name)` with the `mapname` value for the case and the `self.origin[2]` value as the returned value.
+
+
 ## kill_stuck_bots.gsc
 
 This is a temporary solution to inactive bots or bots stuck in corners on custom maps.  
