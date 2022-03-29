@@ -25,6 +25,12 @@ Display the player's killstreak, total kills and deaths on top of the screen
 
 Print the GUID of a player in the console whenever he connects and whenever he chooses/changes class.
 
+## give_perks_on_spawn.gsc
+
+Gives perks to a player whenever he spawns if he doesn't already have them.  
+This script has been written to give sleight of hand and quickdraw even if you have other perks like overkill (carry two primary weapons).  
+You can find the list of perks and pro perks in [perktable.csv](https://github.com/chxseh/MW3-GSC-Dump/blob/e9445976df9f91451fa6e5dc3cb4663390aafcec/_raw-files/mp/perktable.csv)
+
 ## hardcore_tweaks.gsc
 
 The hardcore mode replaces some game functionalities like enabling friendly fire or disabling killcams.  
