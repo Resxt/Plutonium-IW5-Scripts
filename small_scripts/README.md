@@ -38,7 +38,7 @@ With this script you can override the tweaks the hardcore mode brings.
 
 ## kill_players_under_map.gsc
 
-This is a script to kill players when they are under the map.  
+This is a script that kills players when they are under the map.  
 Some maps don't have a script to kill players under the map and they can exploit it to kill players while being under the map.  
 Go under the map on the barrier and check the console to get the value to check.  
 Then open the in-game console and type `mapname` to get the map name.  
