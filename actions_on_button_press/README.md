@@ -26,13 +26,21 @@ Here is a non-exhaustive list of buttons you can use
 "+breathe_sprint"
 ```
 
-## suicide_on_button_press.gsc
-
-The player dies when pressing the button
-
 ## camera_switch_vote_on_button_press.gsc
 
 Allows the players to toggle their vote to change the `camera_thirdPerson` dvar on the server (players vote no by default)  
 When enough players vote yes the server changes the dvar and resets the vote counts.  
 The amount of votes required is more than 50% of the players: 1/1 | 2/2 | 3/4 | 3/5 | 4/6 etc.  
 Bots are ignored for the votes.
+
+## sniper_attachment_switch_on_button_press.gsc
+
+Allows the player to cycle between several attachments for a list of weapons.  
+Displays the key to press to switch to the next attachment as well as the current attachment selected top right.  
+Whenever the player press the key, re-spawns or switches to another class with a valid weapon it will give him the attachment he wants.  
+
+This script has been written for the L118A, MSR and Intervention but can easily be modified or even optimized to support more weapons.
+
+## suicide_on_button_press.gsc
+
+The player dies when pressing the button
