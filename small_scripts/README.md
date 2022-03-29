@@ -39,5 +39,5 @@ This is just a quick temporary solution that works for me.
 
 ## show_text_on_first_spawn.gsc
 
-Show a text the first time a player spawns in every match.
+Show a text the first time a player spawns in every match.  
 This can be used to display a specific rule, a warning or just a message.
