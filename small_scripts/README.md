@@ -6,6 +6,10 @@ Simple drag and drop scripts
 
 Change the team names to custom names depending on the game mode
 
+## disable_nuke_killstreak.gsc
+
+Prevent players from obtaining the nuke/M.O.A.B killstreak when they have enough kills.
+
 ## disable_self_explosive_damage.gsc
 
 Prevents players from dying to their own grenades and rockets.  
