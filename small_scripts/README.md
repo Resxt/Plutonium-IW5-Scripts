@@ -6,15 +6,16 @@ Simple drag and drop scripts
 
 Change the team names to custom names depending on the game mode
 
+## disable_damages.gsc
+
+Disable melee knifing damage.  
+Also prevents players from dying to their own grenades and rockets.  
+Note that if you shoot enough rockets (around 20/30) you can still kill yourself.  
+This also doesn't prevent players from killing themselves when they hold a frag grenade in their hands.
+
 ## disable_nuke_killstreak.gsc
 
 Prevent players from obtaining the nuke/M.O.A.B killstreak when they have enough kills.
-
-## disable_self_explosive_damage.gsc
-
-Prevents players from dying to their own grenades and rockets.  
-Note that if you shoot enough rockets (around 20/30) you can still kill yourself.  
-This also doesn't prevent players from killing themselves when they hold a frag grenade in their hands.
 
 ## display_player_stats.gsc
 
