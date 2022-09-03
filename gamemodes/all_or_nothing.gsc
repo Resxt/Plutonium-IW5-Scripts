@@ -4,7 +4,11 @@
 
 Init()
 {
-    SetGameLimits();
+    SetGameLimits(20);
+
+    SetDvar("bots_play_ads", 0);
+    SetDvar("bots_play_camp", 0);
+    SetDvar("bots_play_killstreak", 0);
 
     level thread OnPlayerConnect();
 }
@@ -33,9 +37,16 @@ OnPlayerSpawned()
 	}
 }
 
-SetGameLimits()
+/*
+<kills_limit> the amount of kills to win
+<time_limit> the amount of minutes until the game ends (optional)
+
+Example:
+SetGameLimits(20); will change the kills limit to 20
+SetGameLimits(40, 15); will change the kills limit to 40 and the time limit to 15 minutes
+*/
+SetGameLimits(kills_limit, time_limit)
 {
-    kills_limit = 20;
     score_multiplier = 0;
 
     switch(level.gameType)
@@ -53,6 +64,12 @@ SetGameLimits()
 
     SetDvar("scr_" + level.gameType + "_scorelimit", kills_limit * score_multiplier);
 	SetDvar("scorelimit", kills_limit * score_multiplier);
+
+    if (IsDefined(time_limit))
+	{
+		SetDvar("scr_" + level.gameType + "_timelimit", time_limit);
+		SetDvar("timelimit", time_limit);
+	}
 }
 
 ReplaceWeapons(new_weapon)
@@ -67,18 +84,11 @@ ReplaceWeapons(new_weapon)
     self SetSpawnWeapon(new_weapon);
 }
 
-ReplaceWeaponBot(new_weapon)
-{
-	self TakeAllWeapons();
-	self GiveWeapon(new_weapon);
-	self SetSpawnWeapon(new_weapon); // This gives the weapon without playing the animation
-}
-
 ReplacePerks()
 {
     self ClearPerks();
 
-    self GivePerk("specialty_fastreload", 0) // Sleight of hand
+    self GivePerk("specialty_fastreload", 0); // Sleight of hand
     self GivePerk("specialty_longersprint", 0);// Extreme conditioning
     self GivePerk("specialty_fastmantle", 0); // Extreme condition PRO
 
@@ -92,7 +102,10 @@ ReplaceKillstreaks()
 {
     self.pers["gamemodeLoadout"] = self cloneLoadout();	
     self.pers["gamemodeLoadout"]["loadoutJuggernaut"] = false;
+    
+    self.pers["gamemodeLoadout"]["loadoutEquipment"] = "throwingknife_mp";
 
+    self.pers["gamemodeLoadout"]["loadoutStreakType"] = "streaktype_specialist";
     self.pers["gamemodeLoadout"]["loadoutKillstreak1"] = "specialty_scavenger_ks";
     self.pers["gamemodeLoadout"]["loadoutKillstreak2"] = "none";
     self.pers["gamemodeLoadout"]["loadoutKillstreak3"] = "none";
