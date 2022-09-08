@@ -110,10 +110,19 @@ ReplaceKillstreaks()
     self.pers["gamemodeLoadout"]["loadoutKillstreak2"] = "none";
     self.pers["gamemodeLoadout"]["loadoutKillstreak3"] = "none";
 
-    if (!isDefined(self.pers["isBot"]) || !self.pers["isBot"])
+    if (self IsBot())
 	{
+        self maps\mp\bots\_bot_utility::botGiveLoadout(self.team, "gamemode", false, true);
+    }
+    else
+    {
         self maps\mp\gametypes\_class::giveLoadout(self.team, "gamemode", false, true);
     }
 
 	maps\mp\killstreaks\_killstreaks::clearKillstreaks();
+}
+
+IsBot()
+{
+    return IsDefined(self.pers["isBot"]) && self.pers["isBot"];
 }
