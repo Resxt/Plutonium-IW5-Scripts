@@ -1,6 +1,6 @@
 # Plutonium-IW5-Scripts
 
-![image](cover.png)
+[![image](cover.jpg)](https://plutonium.pw/)
 
 ## What is this?
 
