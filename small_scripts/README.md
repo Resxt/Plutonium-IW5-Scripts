@@ -57,6 +57,14 @@ This checks for bots kills and deaths every 30 seconds. If they didn't do any ki
 Obviously a better way to do this would be checking for their positions or removing bad spawns on the map or creating waypoints for the map.  
 This is just a quick temporary solution that works for me.
 
+## remove_heavy_weapon_slow.gsc
+
+Set back your speed scale to default whenever you have an heavy weapon equipped.  
+Whenever you have an LMG gun or heavy sniper like a Barrett your speed will be slower than with most weapons.  
+This script makes it so that no matter the weapons you have in your class your speed will be normal/default.  
+The script doesn't modify the player's speed, instead it modifies the speed scaling (sets it back to 1) so it's safe to use with modified `g_speed`.  
+The speeds were tested/monitored with this [speed meter script from quaK](https://github.com/Joelrau/IW5p_DeathRun/blob/aaa9a4231d338b765d8b0fc8b06825b3a6d2a413/plugins/simplevelometer.gsc)
+
 ## show_text_on_first_spawn.gsc
 
 Display a text to a player when it's the first time he spawns in a match.  
