@@ -1,5 +1,7 @@
 # Plutonium-IW5-Scripts
 
+![image](cover.png)
+
 ## What is this?
 
 This is a collection of simple IW5 scripts I created, mostly for my servers.
