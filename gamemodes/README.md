@@ -31,7 +31,7 @@ To enable support for Bot Warfare simply uncomment the lines where it says `Unco
 - Prevent multi kills from counting as multi kills. A double kill will only make the player go up by one weapon and his score will only go up by 50.
 - Play the gun game next weapon sound when the player gets the next weapon and play a sound to all players when a player reaches the last weapon
 - Choose which perks to give to the players
-- A configurable debug mode to print the array of weapons and also switch weapons when typing in the cheat
+- A configurable debug mode to print the array of weapons and also switch weapons when typing in the chat
 
 :no_entry_sign: Features not available/to add
 
