@@ -12,7 +12,7 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_class;
 #include maps\mp\gametypes\_hud_util;
-//#include maps\mp\bots\_bot_utility;
+//#include maps\mp\bots\_bot_utility; // Uncomment if using Bot Warfare
 
 /* Entry point */
 
@@ -565,7 +565,7 @@ ClearPlayerClass()
 	}
 	else
 	{
-        //self botGiveLoadout(self.team, "gamemode", false, true);
+        //self botGiveLoadout(self.team, "gamemode", false, true); // Uncomment if using Bot Warfare
 	}
 
     maps\mp\killstreaks\_killstreaks::clearKillstreaks();
