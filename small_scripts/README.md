@@ -57,6 +57,13 @@ This checks for bots kills and deaths every 30 seconds. If they didn't do any ki
 Obviously a better way to do this would be checking for their positions or removing bad spawns on the map or creating waypoints for the map.  
 This is just a quick temporary solution that works for me.
 
+## manage_bots_fill.gsc
+
+Simple script that changes the Bot Warfare `bots_manage_fill` dvar dynamically to avoid using resource for an empty server.  
+Whenever a player connects or disconnects the script checks the amount of human players and the value of `bots_manage_fill` and sets it accordingly.  
+If the first player joins, it sets the dvar to the value you configured for that specific server (set in `InitServersDvar()` with the server port).  
+If the last player leaves it sets back the dvar to 0 so that no bots will be playing, saving some resources on that server.
+
 ## remove_heavy_weapon_slow.gsc
 
 Set back your speed scale to default whenever you have an heavy weapon equipped.  
