@@ -43,3 +43,10 @@ They weren't even tested so if you add them you will need to do some debug
 - The stinger isn't supported. A GSC script from another source could give support for player lock-on
 - There is no unexpected cases/exceptions handling. For example if you ask for 60 weapons and only want a weapon one time this will create an infinite loop because there are only 51 weapons available
 - Some weapons like the AC-130 could be added in a special category later
+
+## one_in_the_chamber.gsc
+
+Recreation of the Modern Warfare 3 One In The Chamber gamemode with infinite lives.  
+Each game the script will randomly choose a weapon category from the 4 available and pick a random weapon from that category but you can easily change that behavior and add/remove categories and weapons.  
+Only FFA is supported, other modes require some modifications to work properly.  
+Also unlike the original mode this one has infinite lives so if you want limited lives you'll need to edit the script.

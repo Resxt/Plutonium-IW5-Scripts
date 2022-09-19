@@ -49,7 +49,6 @@ Go under the map on the barrier and check the console to get the value to check.
 Then open the in-game console and type `mapname` to get the map name.  
 Finally simply add a case to the `switch (map_name)` with the `mapname` value as the case and the `self.origin[2]` value as the returned value.
 
-
 ## kill_stuck_bots.gsc
 
 This is a temporary solution to inactive bots or bots stuck in corners on custom maps.  
