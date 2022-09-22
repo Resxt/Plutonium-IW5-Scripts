@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-|                           Game: Plutonium IW5 	                     |
+|                           Game: Plutonium IW5                          |
 |               Description : Display text and run GSC code              | 
 |                      by typing commands in the chat                    |
 |                             Author: Resxt                              |
