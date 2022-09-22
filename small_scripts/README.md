@@ -6,6 +6,22 @@ Simple drag and drop scripts
 
 Change the team names to custom names depending on the game mode
 
+## chat_commands.gsc
+
+Let players execute commands by typing in the command.  
+This has been created for private matches and servers that don't use IW4MAdmin.  
+Since there is no permission check I would recommend deleting the sensitive commands if you run a public server or don't fully trust the people in your private match.
+
+:white_check_mark: Features available
+
+- Easy per server (port) commands configuration
+- Easy text print and functions support
+- Exceptions handled with error messages (not enough arguments, command doesn't exist etc.)
+
+:no_entry_sign: Features not available/to add
+
+- Configure global/all servers commands
+
 ## disable_damages.gsc
 
 Disable melee knifing damage.  
