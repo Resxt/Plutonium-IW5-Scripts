@@ -8,9 +8,12 @@ Change the team names to custom names depending on the game mode
 
 ## chat_commands.gsc
 
-Let players execute commands by typing in the command.  
-This has been created for private matches and servers that don't use IW4MAdmin.  
-Since there is no permission check I would recommend deleting the sensitive commands if you run a public server or don't fully trust the people in your private match.
+Let players execute commands by typing in the chat.  
+This can be used to display text to the player, for example the server rules or execute GSC code to kill the player or give him a particular weapon for example.  
+Since there is no permission check I would recommend deleting the sensitive commands if you run a public server or don't fully trust the people in your private match.  
+
+This has been created for private matches and servers that don't use IW4MAdmin (or that removed its commands).  
+If you plan on using this with IW4MAdmin's commands enabled you should double check that commands don't overwrite something (or remove them in IW4MAdmin)
 
 :white_check_mark: Features available
 
