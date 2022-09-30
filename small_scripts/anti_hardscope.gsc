@@ -18,7 +18,7 @@ OnPlayerConnect()
         }*/
 
         player thread OnPlayerSpawned(); // Remove/comment if using Bot Warfare
-	}
+    }
 }
 
 OnPlayerSpawned()
