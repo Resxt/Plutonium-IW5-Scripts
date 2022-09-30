@@ -7,8 +7,8 @@ Init()
 
 OnPlayerConnect()
 {
-	for(;;)
-	{
+    for(;;)
+    {
         level waittill("connected", player);
 
         // Uncomment if using Bot Warfare
