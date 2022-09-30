@@ -2,7 +2,7 @@
 
 Init()
 {
-	thread OnPlayerConnect();
+	level thread OnPlayerConnect();
 }
 
 OnPlayerConnect()
