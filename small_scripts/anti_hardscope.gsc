@@ -2,17 +2,17 @@
 
 Init()
 {
-	level thread OnPlayerConnect();
+    level thread OnPlayerConnect();
 }
 
 OnPlayerConnect()
 {
 	for(;;)
 	{
-		level waittill("connected", player);
+        level waittill("connected", player);
 
         // Uncomment if using Bot Warfare
-		/*if (!self IsBot())
+        /*if (!self IsBot())
         {
             player thread OnPlayerSpawned();
         }*/
@@ -23,16 +23,16 @@ OnPlayerConnect()
 
 OnPlayerSpawned()
 {
-	self endon("disconnect");
+    self endon("disconnect");
 
-	for(;;)
-	{
-		self waittill("spawned_player");
+    for(;;)
+    {
+        self waittill("spawned_player");
 
         self.pers["allow_ads"] = true;
 
-		self thread AntiHardscope();
-	}
+        self thread AntiHardscope();
+    }
 }
 
 AntiHardscope()
