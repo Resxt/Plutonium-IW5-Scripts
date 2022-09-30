@@ -2,6 +2,10 @@
 
 Simple drag and drop scripts
 
+## anti_hardscope.gsc
+
+Prevent players from hardscoping
+
 ## change_team_names.gsc
 
 Change the team names to custom names depending on the game mode
