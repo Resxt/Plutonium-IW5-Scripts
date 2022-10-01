@@ -12,7 +12,7 @@ OnPlayerConnect()
         level waittill("connected", player);
 
         // Uncomment if using Bot Warfare
-        /*if (!self IsBot())
+        /*if (!player IsBot())
         {
             player thread OnPlayerSpawned();
         }*/
