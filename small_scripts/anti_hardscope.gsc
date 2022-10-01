@@ -37,6 +37,9 @@ OnPlayerSpawned()
 
 AntiHardscope()
 {
+    self endon("disconnect");
+    self endon("death");
+
     while (true)
     {
         if (self PlayerAds() >= 0.75)
