@@ -15,6 +15,14 @@
 
 Init() 
 {
+    InitChatCommands();
+}
+
+InitChatCommands()
+{
+    level.commands_prefix = "!";
+    level.commands_servers_ports = ["27016", "27017"];
+
     InitCommands();
 
     level thread ChatListener();
@@ -22,13 +30,35 @@ Init()
 
 InitCommands()
 {
-    level.commands_prefix = "!";
+    CreateCommand(["27016"], "rules", "text", ["Do not camp", "Do not spawnkill", "Do not disrespect other players"]);
+    CreateCommand(["27017"], "rules", "text", ["Leave your spot and don't camp after using a M.O.A.B", "Don't leave while being infected", "Do not disrespect other players"]);
+    
+    CreateCommand(level.commands_servers_ports, "suicide", "function", ::SuicideCommand);
+    CreateCommand(level.commands_servers_ports, "map", "function", ::ChangeMapCommand);
+    CreateCommand(level.commands_servers_ports, "mode", "function", ::ChangeModeCommand);
+    CreateCommand(level.commands_servers_ports, "mapmode", "function", ::ChangeMapAndModeCommand);
+}
 
-    level.commands["27016"]["rules"] = ["Do not camp", "Do not spawnkill", "Do not disrespect other players"];
-    level.commands["27016"]["suicide"] = ::SuicideCommand;
-    level.commands["27016"]["map"] = ::ChangeMapCommand;
-    level.commands["27016"]["mode"] = ::ChangeModeCommand;
-    level.commands["27016"]["mapmode"] = ::ChangeMapAndModeCommand;
+/*
+<serverPorts> the ports of the servers this command will be created for
+<commandName> the name of the command, this is what players will type in the chat
+<commandType> the type of the command: <text> is for arrays of text to display text in the player's chat and <function> is to execute a function
+*/
+CreateCommand(serverPorts, commandName, commandType, commandValue)
+{
+    foreach (serverPort in serverPorts)
+    {
+        level.commands[serverPort][commandName]["type"] = commandType;
+    
+        if (commandType == "text")
+        {
+            level.commands[serverPort][commandName]["text"] = commandValue;
+        }
+        else if (commandType == "function")
+        {
+            level.commands[serverPort][commandName]["function"] = commandValue;
+        }
+    }
 }
 
 
@@ -41,11 +71,14 @@ ChatListener()
     {
         level waittill("say", message, player);
 
-        message = GetSubStr(message, 1); // Remove the random/buggy character at index 0, get the real message
+        if (message[0] != level.commands_prefix) // For some reason checking for the buggy character doesn't work so we start at the second character if the first isn't the command prefix
+        {
+            message = GetSubStr(message, 1); // Remove the random/buggy character at index 0, get the real message
+        }
 
         if (message[0] != level.commands_prefix) // If the message doesn't start with the command prefix
         {
-            continue; // Ignore/skip
+            continue; // stop
         }
 
         commandArray = StrTok(message, " "); // Separate the command by space character. Example: ["!map", "mp_dome"]
@@ -67,13 +100,13 @@ ChatListener()
 
             if (IsDefined(commandValue))
             {
-                if (IsDefined(commandValue.size))
+                if (commandValue["type"] == "text")
                 {
-                    player thread TellPlayer(commandValue, 2);
+                    player thread TellPlayer(commandValue["text"], 2);
                 }
-                else
+                else if (commandValue["type"] == "function")
                 {
-                    error = player [[commandValue]](args);
+                    error = player [[commandValue["function"]]](args);
 
                     if (IsDefined(error))
                     {
