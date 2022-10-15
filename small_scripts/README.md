@@ -17,17 +17,22 @@ This can be used to display text to the player, for example the server rules or 
 Since there is no permission check I would recommend deleting the sensitive commands if you run a public server or don't fully trust the people in your private match.  
 
 This has been created for private matches and servers that don't use IW4MAdmin (or that removed its commands).  
-If you plan on using this with IW4MAdmin's commands enabled you should double check that commands don't overwrite something (or remove them in IW4MAdmin)
+If you plan on using this with IW4MAdmin's commands enabled you should double check that commands don't overwrite something (or remove them in IW4MAdmin).  
+Note that this has not been tested with IW4MAdmin and is not really meant to run alongside.
 
 :white_check_mark: Features available
 
-- Easy per server (port) commands configuration
+- Easy per server (port) commands configuration. You can also pass an array of server ports to easily add a command to multiple servers
 - Easy text print and functions support
 - Exceptions handled with error messages (not enough arguments, command doesn't exist etc.)
+- Configure global/all servers commands
 
 :no_entry_sign: Features not available/to add
 
-- Configure global/all servers commands
+- Commands aliases
+- Help command to explain how to use a command
+- Permissions/ranks to restrict some commands to a certain type of players (admin, VIP etc.)
+- A plugin system to easily allow adding/removing possible commands. Each command would have its own GSC file to add/remove on the fly
 
 ## disable_damages.gsc
 
