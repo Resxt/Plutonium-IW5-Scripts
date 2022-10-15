@@ -30,13 +30,20 @@ InitChatCommands()
 
 InitCommands()
 {
-    CreateCommand(["27016"], "rules", "text", ["Do not camp", "Do not spawnkill", "Do not disrespect other players"]);
-    CreateCommand(["27017"], "rules", "text", ["Leave your spot and don't camp after using a M.O.A.B", "Don't leave while being infected", "Do not disrespect other players"]);
-    
-    CreateCommand(level.commands_servers_ports, "suicide", "function", ::SuicideCommand);
-    CreateCommand(level.commands_servers_ports, "map", "function", ::ChangeMapCommand);
-    CreateCommand(level.commands_servers_ports, "mode", "function", ::ChangeModeCommand);
-    CreateCommand(level.commands_servers_ports, "mapmode", "function", ::ChangeMapAndModeCommand);
+    // All servers text commands
+    CreateCommand(level.commands_servers_ports, "help", "text", ["Type " + level.commands_prefix + "commands to get a list of commands", "Type " + level.commands_prefix + "help followed by a command name to see how to use it"]);
+
+    // All servers function commands
+    CreateCommand(level.commands_servers_ports, "map", "function", ::ChangeMapCommand, ["Example: " + level.commands_prefix + "map mp_dome"]);
+    CreateCommand(level.commands_servers_ports, "mode", "function", ::ChangeModeCommand, ["Example: " + level.commands_prefix + "mode FFA_default"]);
+    CreateCommand(level.commands_servers_ports, "mapmode", "function", ::ChangeMapAndModeCommand, ["Example: " + level.commands_prefix + "mapmode mp_seatown TDM_default"]);
+
+    // Specific server(s) text commands
+    CreateCommand(["27016", "27017"], "rules", "text", ["Do not camp", "Do not spawnkill", "Do not disrespect other players"]);
+    CreateCommand(["27018"], "rules", "text", ["Leave your spot and don't camp after using a M.O.A.B", "Don't leave while being infected", "Do not disrespect other players"]);
+
+    // Specific server(s) function commands
+    CreateCommand(["27016", "27017"], "suicide", "function", ::SuicideCommand);
 }
 
 /*
@@ -44,11 +51,16 @@ InitCommands()
 <commandName> the name of the command, this is what players will type in the chat
 <commandType> the type of the command: <text> is for arrays of text to display text in the player's chat and <function> is to execute a function
 */
-CreateCommand(serverPorts, commandName, commandType, commandValue)
+CreateCommand(serverPorts, commandName, commandType, commandValue, commandHelp)
 {
     foreach (serverPort in serverPorts)
     {
         level.commands[serverPort][commandName]["type"] = commandType;
+
+        if (IsDefined(commandHelp))
+        {
+            level.commands[serverPort][commandName]["help"] = commandHelp;
+        }
     
         if (commandType == "text")
         {
@@ -90,33 +102,76 @@ ChatListener()
             args[args.size] = commandArray[i];
         }
 
+        // commands command
         if (command == level.commands_prefix + "commands")
         {
             player thread TellPlayer(GetArrayKeys(level.commands[GetDvar("net_port")]), 2, true);
         }
         else
         {
-            commandValue = level.commands[GetDvar("net_port")][GetSubStr(command, 1)];
-
-            if (IsDefined(commandValue))
+            // help command
+            if (command == level.commands_prefix + "help" && !IsDefined(level.commands[GetDvar("net_port")]["help"]) || command == level.commands_prefix + "help" && IsDefined(level.commands[GetDvar("net_port")]["help"]) && args.size >= 1)
             {
-                if (commandValue["type"] == "text")
+                if (args.size < 1)
                 {
-                    player thread TellPlayer(commandValue["text"], 2);
+                    player thread TellPlayer(NotEnoughArgsError(1), 1.5);
                 }
-                else if (commandValue["type"] == "function")
+                else
                 {
-                    error = player [[commandValue["function"]]](args);
+                    commandValue = level.commands[GetDvar("net_port")][args[0]];
 
-                    if (IsDefined(error))
+                    if (IsDefined(commandValue))
                     {
-                        player thread TellPlayer(error, 1.5);
+                        commandHelp = commandValue["help"];
+
+                        if (IsDefined(commandHelp))
+                        {
+                            player thread TellPlayer(commandHelp, 1.5);
+                        }
+                        else
+                        {
+                            player thread TellPlayer(CommandHelpDoesNotExistError(args[0]), 1);
+                        }
+                    }
+                    else
+                    {
+                        if (args[0] == "commands")
+                        {
+                            player thread TellPlayer(CommandHelpDoesNotExistError(args[0]), 1);
+                        }
+                        else
+                        {
+                            player thread TellPlayer(CommandDoesNotExistError(args[0]), 1);
+                        }
                     }
                 }
             }
+            // any other command
             else
             {
-                player thread TellPlayer(CommandDoesNotExistError(), 1);
+                commandName = GetSubStr(command, 1);
+                commandValue = level.commands[GetDvar("net_port")][commandName];
+
+                if (IsDefined(commandValue))
+                {
+                    if (commandValue["type"] == "text")
+                    {
+                        player thread TellPlayer(commandValue["text"], 2);
+                    }
+                    else if (commandValue["type"] == "function")
+                    {
+                        error = player [[commandValue["function"]]](args);
+
+                        if (IsDefined(error))
+                        {
+                            player thread TellPlayer(error, 1.5);
+                        }
+                    }
+                }
+                else
+                {
+                    player thread TellPlayer(CommandDoesNotExistError(commandName), 1);
+                }
             }
         }
     }
@@ -205,9 +260,14 @@ ChangeMode(modeName, restart)
 
 /* Error functions section */
 
-CommandDoesNotExistError()
+CommandDoesNotExistError(commandName)
 {
-    return ["This command doesn't exist", "Type " + level.commands_prefix + "commands" + " to get a list of commands"];
+    return ["The command " + commandName + " doesn't exist", "Type " + level.commands_prefix + "commands to get a list of commands"];
+}
+
+CommandHelpDoesNotExistError(commandName)
+{
+    return ["The command " + commandName + " doesn't have any help message"];
 }
 
 NotEnoughArgsError(minimumArgs)
