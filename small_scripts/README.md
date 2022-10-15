@@ -22,17 +22,18 @@ Note that this has not been tested with IW4MAdmin and is not really meant to run
 
 :white_check_mark: Features available
 
-- Easy per server (port) commands configuration. You can also pass an array of server ports to easily add a command to multiple servers
-- Easy text print and functions support
-- Exceptions handled with error messages (not enough arguments, command doesn't exist etc.)
-- Configure global/all servers commands
+- Easy per server (port) commands configuration. You can either pass an array of one server port, or multiple, or the `level.commands_servers_ports` arrat to easily add a command to one/multiple/all servers
+- Chat text print and functions support
+- All exceptions are handled with error messages (not enough arguments, command doesn't exist, command doesn't have any help message etc.)
+- A commands command that lists all available commands dynamically
+- A help command that explains how to use a given command
 
 :no_entry_sign: Features not available/to add
 
 - Commands aliases
-- Help command to explain how to use a command
 - Permissions/ranks to restrict some commands to a certain type of players (admin, VIP etc.)
 - A plugin system to easily allow adding/removing possible commands. Each command would have its own GSC file to add/remove on the fly
+- Configurable text colors. As of now every text will be white
 
 ## disable_damages.gsc
 
