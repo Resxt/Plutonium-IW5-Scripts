@@ -4,11 +4,12 @@
 
 ## What is this?
 
-This is a collection of simple IW5 scripts I created, mostly for my servers.
+This is a collection of [Plutonium](https://plutonium.pw/docs/intro/) IW5/MW3 scripts I created, written in [GSC](https://plutonium.pw/docs/modding/gsc/).  
+Some scripts (mostly older ones) have specific use cases and some others were made to be as generic as possible so you might find something useful.
 
-I don't have any GSC knowledge so the scripts can probably be optimized but they do their job.
+I'm not the best at GSC and some scripts were made months ago when I wasn't as good as now so some scripts might not be perfectly optimized or done the proper way but they do their job and should at least give you an idea of how to do certain things or work well enough for you to use them.  
 
-I was able to create these scripts with the awesome help of Birchy, DoktorSAS, FutureRave and other people on Discord (thanks!)
+Huge thanks to everyone who helped me learn GSC: Birchy, DoktorSAS, FutureRave and other people on Discord.
 
 ## How do I download a script?
 
