@@ -21,7 +21,7 @@ Init()
 InitChatCommands()
 {
     level.commands_prefix = "!";
-    level.commands_servers_ports = ["27016", "27017"];
+    level.commands_servers_ports = ["27016", "27017", "27018"];
 
     InitCommands();
 
