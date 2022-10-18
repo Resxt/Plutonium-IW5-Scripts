@@ -30,13 +30,9 @@ Make sure to put `All` or `Any` for the file type and to add `.gsc` at the end o
   ![image](https://user-images.githubusercontent.com/55228336/153305302-2bb87264-2ec5-4ea5-ac70-0e96b61ab2f7.png)
 </details>
 
-
-
-
-
 ## How do I use a script?
 
-[Follow the instructions in the documentation](https://plutonium.pw/docs/modding/loading-mods/#iw5)
+[Follow the instructions in the documentation](https://plutonium.pw/docs/modding/loading-mods/#loading-existing-scripts-on-iw5)
 
 Simply drop a `.gsc` file inside `%localappdata%\Plutonium\storage\iw5\scripts`.
 
