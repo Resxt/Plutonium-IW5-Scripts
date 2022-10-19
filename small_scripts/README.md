@@ -22,7 +22,7 @@ Note that this has not been tested with IW4MAdmin and is not really meant to run
 
 :white_check_mark: Features available
 
-- Easy per server (port) commands configuration. You can either pass an array of one server port, or multiple, or the `level.commands_servers_ports` arrat to easily add a command to one/multiple/all servers
+- Easy per server (port) commands configuration. You can either pass an array of one server port, or multiple, or the `level.commands_servers_ports` array to easily add a command to one/multiple/all servers
 - Chat text print and functions support
 - All exceptions are handled with error messages (not enough arguments, command doesn't exist, command doesn't have any help message etc.)
 - A commands command that lists all available commands dynamically
