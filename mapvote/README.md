@@ -21,8 +21,9 @@ Huge thanks to him.
 - You can configure how much maps and modes you want on screen
 - It will automatically adapt the amount of elements to display if you don't choose a fixed amount of maps/modes to show
 - It has separate map and mode choices
-- It supports custom DSR
 - It supports custom maps
+- It supports custom display names for maps
+- It supports custom DSR
 - It supports custom gamemode names
 - It rotates a random map from the list when there are no votes for maps. Same applies for modes too
 - Controllers are fully supported and work out of the box
