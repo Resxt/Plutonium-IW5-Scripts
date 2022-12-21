@@ -331,6 +331,13 @@ AttachmentIsBanned(weaponName, attachmentName)
             return true;
         }
     }
+    else if (GetBaseWeaponName(weaponName) == "iw5_mp412_mp" || GetBaseWeaponName(weaponName) == "iw5_44magnum_mp" || GetBaseWeaponName(weaponName) == "iw5_deserteagle_mp")
+    {
+        if (attachmentName == "silencer02") // works but makes a silencer float on top of the player's on his screen
+        {
+            return true;
+        }
+    }
 
     return false;
 }
