@@ -48,7 +48,7 @@ Here are the dvars you can configure:
 |---|---|---|---|
 | mapvote_enable | Toggle whether the mapvote is activated or not. 0 is off and 1 is on | 0 | 0 or 1 |
 | mapvote_debug | Toggle whether the mapvote runs in debug mode or not. This will display the mapvote menu a few seconds after starting the game. 0 is off and 1 is on | 0 | 0 or 1 |
-| mapvote_maps | A list of the maps that are available for rotation | Every maps including DLC maps and Plutonium DLC maps (excluding [Face Off maps](https://callofduty.fandom.com/wiki/Face_Off#Modern_Warfare_3)) | Any text followed by a comma (,) and then the map code name (mapname). Each block is separated with a colon (:) |
+| mapvote_maps | A list of the maps that are available for rotation | Every maps including DLC maps and Plutonium DLC maps (excluding [Face Off maps](https://callofduty.fandom.com/wiki/Face_Off#Modern_Warfare_3)) | Any text followed by a comma (,) and then the map code name (mapname). Each block is separated with a colon (:). A single space `" "` is also accepted if you don't want any maps for this dvar |
 | mapvote_modes | A list of the modes that are available for rotation. The first parameter is how the mode will be displayed, it can be set to anything you like, the second parameter is the name of the DSR file to load | "Team Deathmatch,TDM_default:Domination,DOM_default" | Any text followed by a comma (,) and then the cfg name. Each block is separated with a colon (:) |
 | mapvote_additional_maps_dvars | A list of dvar name(s) that contain additional maps, respecting the `mapvote_maps` format.  See [Adding a custom map](#adding-a-custom-map) | "" | Any valid dvar name that has a list of maps as value. Each dvar name is separated with a colon (:) |
 | mapvote_limits_maps | The amount of maps to display. 0 will handle it automatically | 0 | Any plain number from 0 to `mapvote_limits_max` |
@@ -137,6 +137,10 @@ The script will then automatically read all values from `mapvote_maps` and `mapv
 
 You can simply repeat this process to add even more dvars in case you go up to the characters limit again or if you simply want to organize your maps dvars.  
 For example you could create an additional dvar named `mapvote_maps_bo2` that holds some maps and then add it to the list of dvars like this `mapvote_additional_maps_dvars "mapvote_maps_mw2:mapvote_maps_bo2"`.  
+
+Note that you can change the value of `mapvote_maps` to a single space `" "` if you don't want any map in this dvar.  
+It will then only get maps from the additional dvars and will ignore the original dvar.  
+This can be useful to organise your maps dvars.
 
 ### Notes
 

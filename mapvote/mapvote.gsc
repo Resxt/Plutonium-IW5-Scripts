@@ -79,7 +79,14 @@ InitVariables()
 
     foreach (mapDvar in StrTok(GetDvar("mapvote_additional_maps_dvars"), ":"))
     {
-        mapsString = mapsString + ":" + GetDvar(mapDvar);
+        if (mapsString == " ")
+        {
+            mapsString = GetDvar(mapDvar);
+        }
+        else
+        {
+            mapsString = mapsString + ":" + GetDvar(mapDvar);
+        }
     }
 
     mapsArray = StrTok(mapsString, ":");
