@@ -144,6 +144,8 @@ This can be useful to organise your maps dvars.
 
 ### Notes
 
+- Capture the Flag is very buggy and will not be fixed. It pretty much breaks the entire mapvote script so I recommend to not add it.  
+From the tests I did it seems a lot of things outside of my mapvote break it and I'm not willing to fight with so much unknown bugs coming from the outside
 - If right click is set to toggle ads then pressing right click will make the player go up by one every 0.25s until he right clicks again.  
 If I didn't change it to be that way players with toggle ads would have to press right click twice to go up by one all the time.  
 Now instead they simply right click once to start going up and right click again to stop which is a better user experience.
