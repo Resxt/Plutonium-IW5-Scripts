@@ -37,6 +37,7 @@ InitCommands()
     CreateCommand(level.commands_servers_ports, "map", "function", ::ChangeMapCommand, ["Example: " + level.commands_prefix + "map mp_dome"]);
     CreateCommand(level.commands_servers_ports, "mode", "function", ::ChangeModeCommand, ["Example: " + level.commands_prefix + "mode FFA_default"]);
     CreateCommand(level.commands_servers_ports, "mapmode", "function", ::ChangeMapAndModeCommand, ["Example: " + level.commands_prefix + "mapmode mp_seatown TDM_default"]);
+    CreateCommand(level.commands_servers_ports, "changeteam", "function", ::ChangeTeamCommand, ["Example: " + level.commands_prefix + "changeteam Resxt"]);
 
     // Specific server(s) text commands
     CreateCommand(["27016", "27017"], "rules", "text", ["Do not camp", "Do not spawnkill", "Do not disrespect other players"]);
@@ -237,6 +238,21 @@ ChangeMapAndModeCommand(args)
     ChangeMap(args[0]);
 }
 
+ChangeTeamCommand(args)
+{
+    if (args.size < 1)
+    {
+        return NotEnoughArgsError(1);
+    }
+
+    error = ChangeTeam(args[0]);
+
+    if (IsDefined(error))
+    {
+        return error;
+    }
+}
+
 
 
 /* Logic functions section */
@@ -253,6 +269,25 @@ ChangeMode(modeName, restart)
     if (restart)
     {
         cmdexec("map_restart");
+    }
+}
+
+ChangeTeam(playerName)
+{
+    player = FindPlayerByName(playerName);
+
+    if (!IsDefined(player))
+    {
+        return PlayerDoesNotExistError(playerName);
+    }
+
+    if (player.team == "axis")
+    {
+        player [[level.allies]]();
+    }
+    else if (player.team == "allies")
+    {
+        player [[level.axis]]();
     }
 }
 
@@ -273,4 +308,24 @@ CommandHelpDoesNotExistError(commandName)
 NotEnoughArgsError(minimumArgs)
 {
     return ["Not enough arguments supplied", "At least " + minimumArgs + " argument expected"];
+}
+
+PlayerDoesNotExistError(playerName)
+{
+    return ["Player " + playerName + " was not found"];
+}
+
+
+
+/* Utils section */
+
+FindPlayerByName(name)
+{
+    foreach (player in level.players)
+    {
+        if (ToLower(player.name) == ToLower(name))
+        {
+            return player;
+        }
+    }
 }
