@@ -26,6 +26,7 @@ Huge thanks to him.
 - It supports custom DSR
 - It supports custom gamemode names
 - It rotates a random map from the list when there are no votes for maps. Same applies for modes too
+- You can choose to rotate a random map and mode from a list you define when the human players count is between a min and max values you define (disabled by default)
 - Controllers are fully supported and work out of the box
 - It has a good level of customization
 - It has a debug mode to quickly preview the menu and print some values in the console
@@ -68,6 +69,10 @@ Here are the dvars you can configure:
 | mapvote_blur_fade_in_time | The time (in seconds) it takes for the blur to reach `mapvote_blur_level`. For example if you set it to 10 and `mapvote_blur_level` is 5 then it will progressively blur the screen from 0 to 5 in 10 seconds | 2 | Any number |
 | mapvote_horizontal_spacing | The horizontal spacing between the map/mode names on the left and the vote counts on the right. I recommend setting this value according to the longest map or mode name length so that it doesn't overlap with the vote counts | 75 | Any plain number |
 | mapvote_display_wait_time | Once the killcam ends, the time to wait before displaying the vote menu (in seconds) | 1 | Any number superior or equal to 0.05 |
+| mapvote_default_rotation_maps | A list of the map code names that are available for default rotation | "mp_dome:mp_nuked:mp_rust" | Any map code name. Each map is separated with a colon (:) |
+| mapvote_default_rotation_modes  | A list of the DSR file names that are available for default rotation | "TDM_default" | Any DSR file name. Each DSR file name is separated with a colon (:) |
+| mapvote_default_rotation_min_players | The minimum amount of human players required to rotate the default rotation instead of showing the mapvote. If the human players count is smaller than this then it will display the mapvote | 0 | Any plain number from 0 to 18 |
+| mapvote_default_rotation_max_players | The maximum amount of human players required to rotate the default rotation instead of showing the mapvote. If the human players count is higher than this then it will display the mapvote | 0 | Any plain number from 0 to 18 |
 
 ### Configuration
 
@@ -96,6 +101,10 @@ set mapvote_blur_level 2.5
 set mapvote_blur_fade_in_time 2
 set mapvote_horizontal_spacing 75
 set mapvote_display_wait_time 1
+set mapvote_default_rotation_maps "mp_dome:mp_nuked:mp_rust"
+set mapvote_default_rotation_modes "TDM_default"
+set mapvote_default_rotation_min_players 0
+set mapvote_default_rotation_max_players 0
 ```
 
 Here are some pre-set values if you want to quickly copy/paste something

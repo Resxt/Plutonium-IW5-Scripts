@@ -71,6 +71,10 @@ InitDvars()
     SetDvarIfNotInitialized("mapvote_blur_fade_in_time", 2);
     SetDvarIfNotInitialized("mapvote_horizontal_spacing", 75);
     SetDvarIfNotInitialized("mapvote_display_wait_time", 1);
+    SetDvarIfNotInitialized("mapvote_default_rotation_maps", "mp_dome:mp_nuked:mp_rust");
+    SetDvarIfNotInitialized("mapvote_default_rotation_modes", "TDM_default");
+    SetDvarIfNotInitialized("mapvote_default_rotation_min_players", 0);
+    SetDvarIfNotInitialized("mapvote_default_rotation_max_players", 0);
 }
 
 InitVariables()
@@ -575,21 +579,53 @@ OnKillcamEnd()
 	{
 	    if (isRoundBased() && !wasLastRound())
 			return false;	
+
 		wait GetDvarInt("mapvote_display_wait_time");
-		
-		StartVote();
-		ListenForEndVote();
+		DoRotation();
+
         return false;
     }
 	
     level waittill("final_killcam_done");
 	if (isRoundBased() && !wasLastRound())
 		return true;
-	wait GetDvarInt("mapvote_display_wait_time");
 
-	StartVote();
-	ListenForEndVote();
+	wait GetDvarInt("mapvote_display_wait_time");
+    DoRotation();
+
     return true;
+}
+
+ShouldRotateDefault()
+{
+    humanPlayersCount = GetHumanPlayers().size;
+
+    if (GetDvarInt("mapvote_default_rotation_max_players") > 0 && humanPlayersCount >= GetDvarInt("mapvote_default_rotation_min_players") && humanPlayersCount <= GetDvarInt("mapvote_default_rotation_max_players"))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+RotateDefault()
+{
+    cmdexec("load_dsr " + GetRandomElementInArray(StrTok(GetDvar("mapvote_default_rotation_modes"), ":")));
+	wait(0.05);
+	cmdexec("map " + GetRandomElementInArray(StrTok(GetDvar("mapvote_default_rotation_maps"), ":")));
+}
+
+DoRotation()
+{
+	if (ShouldRotateDefault())
+	{
+		RotateDefault();
+	}
+	else
+	{
+        StartVote();
+        ListenForEndVote();
+	}
 }
 
 
