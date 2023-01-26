@@ -456,9 +456,7 @@ ListenForEndVote()
         Print("[MAPVOTE] Rotating to " + mapName + " | " + modeName + " (" + modeDsr + ".dsr)");
     }
 
-    cmdexec("load_dsr " + modeDsr);
-	wait(0.05);
-	cmdexec("map " + mapName);
+    DoRotation(modeDsr, mapName);
 }
 
 SetMapvoteData(type, elements)
@@ -581,7 +579,7 @@ OnKillcamEnd()
 			return false;	
 
 		wait GetDvarInt("mapvote_display_wait_time");
-		DoRotation();
+		StartRotation();
 
         return false;
     }
@@ -591,7 +589,7 @@ OnKillcamEnd()
 		return true;
 
 	wait GetDvarInt("mapvote_display_wait_time");
-    DoRotation();
+    StartRotation();
 
     return true;
 }
@@ -610,12 +608,17 @@ ShouldRotateDefault()
 
 RotateDefault()
 {
-    cmdexec("load_dsr " + GetRandomElementInArray(StrTok(GetDvar("mapvote_default_rotation_modes"), ":")));
-	wait(0.05);
-	cmdexec("map " + GetRandomElementInArray(StrTok(GetDvar("mapvote_default_rotation_maps"), ":")));
+    DoRotation(GetRandomElementInArray(StrTok(GetDvar("mapvote_default_rotation_modes"), ":")), GetRandomElementInArray(StrTok(GetDvar("mapvote_default_rotation_maps"), ":")));
 }
 
-DoRotation()
+DoRotation(modeName, mapName)
+{
+    cmdexec("load_dsr " + modeDsr);
+	wait(0.05);
+	cmdexec("map " + mapName);
+}
+
+StartRotation()
 {
 	if (ShouldRotateDefault())
 	{
