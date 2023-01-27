@@ -38,6 +38,7 @@ InitCommands()
     CreateCommand(level.commands_servers_ports, "mode", "function", ::ChangeModeCommand, ["Example: " + level.commands_prefix + "mode FFA_default"]);
     CreateCommand(level.commands_servers_ports, "mapmode", "function", ::ChangeMapAndModeCommand, ["Example: " + level.commands_prefix + "mapmode mp_seatown TDM_default"]);
     CreateCommand(level.commands_servers_ports, "changeteam", "function", ::ChangeTeamCommand, ["Example: " + level.commands_prefix + "changeteam Resxt"]);
+    CreateCommand(level.commands_servers_ports, "teleport", "function", ::TeleportCommand, ["Example: " + level.commands_prefix + "teleport me Eldor", "Example: " + level.commands_prefix + "teleport Eldor me", "Example: " + level.commands_prefix + "teleport Eldor Rektinator"]);
 
     // Specific server(s) text commands
     CreateCommand(["27016", "27017"], "rules", "text", ["Do not camp", "Do not spawnkill", "Do not disrespect other players"]);
@@ -100,7 +101,7 @@ ChatListener()
 
         for (i = 1; i < commandArray.size; i++)
         {
-            args[args.size] = commandArray[i];
+            args = AddElementToArray(args, commandArray[i]);
         }
 
         // commands command
@@ -253,6 +254,21 @@ ChangeTeamCommand(args)
     }
 }
 
+TeleportCommand(args)
+{
+    if (args.size < 2)
+    {
+        return NotEnoughArgsError(2);
+    }
+
+    error = TeleportPlayer(args[0], args[1]);
+
+    if (IsDefined(error))
+    {
+        return error;
+    }
+}
+
 
 
 /* Logic functions section */
@@ -289,6 +305,35 @@ ChangeTeam(playerName)
     {
         player [[level.axis]]();
     }
+}
+
+TeleportPlayer(teleportedPlayerName, destinationPlayerName)
+{
+    players = [];
+    names = [teleportedPlayerName, destinationPlayerName];
+
+    for (i = 0; i < names.size; i++)
+    {
+        name = names[i];
+
+        if (name == "me")
+        {
+            players = AddElementToArray(players, self);
+        }
+        else
+        {
+            player = FindPlayerByName(name);
+
+            if (!IsDefined(player))
+            {
+                return PlayerDoesNotExistError(name);
+            }
+
+            players = AddElementToArray(players, player);
+        }
+    }
+
+    players[0] SetOrigin(players[1].origin);
 }
 
 
@@ -328,4 +373,10 @@ FindPlayerByName(name)
             return player;
         }
     }
+}
+
+AddElementToArray(array, element)
+{
+    array[array.size] = element;
+    return array;
 }
