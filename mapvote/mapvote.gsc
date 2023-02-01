@@ -611,9 +611,9 @@ RotateDefault()
     DoRotation(GetRandomElementInArray(StrTok(GetDvar("mapvote_default_rotation_modes"), ":")), GetRandomElementInArray(StrTok(GetDvar("mapvote_default_rotation_maps"), ":")));
 }
 
-DoRotation(modeName, mapName)
+DoRotation(modeDsr, mapName)
 {
-    cmdexec("load_dsr " + modeDsr);
+        cmdexec("load_dsr " + modeDsr);
 	wait(0.05);
 	cmdexec("map " + mapName);
 }
