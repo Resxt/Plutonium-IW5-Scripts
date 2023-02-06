@@ -37,11 +37,11 @@ InitCommands()
     CreateCommand(level.commands_servers_ports, "map", "function", ::ChangeMapCommand, ["Example: " + level.commands_prefix + "map mp_dome"]);
     CreateCommand(level.commands_servers_ports, "mode", "function", ::ChangeModeCommand, ["Example: " + level.commands_prefix + "mode FFA_default"]);
     CreateCommand(level.commands_servers_ports, "mapmode", "function", ::ChangeMapAndModeCommand, ["Example: " + level.commands_prefix + "mapmode mp_seatown TDM_default"]);
-    CreateCommand(level.commands_servers_ports, "changeteam", "function", ::ChangeTeamCommand, "default_help_one_player");
-    CreateCommand(level.commands_servers_ports, "teleport", "function", ::TeleportCommand, "default_help_two_players");
-    CreateCommand(level.commands_servers_ports, "norecoil", "function", ::NoRecoilCommand, "default_help_one_player");
-    CreateCommand(level.commands_servers_ports, "invisible", "function", ::InvisibleCommand, "default_help_one_player");
-    CreateCommand(level.commands_servers_ports, "wallhack", "function", ::WallhackCommand, "default_help_one_player");
+    CreateCommand(level.commands_servers_ports, "changeteam", "function", ::ChangeTeamCommand, ["default_help_one_player"]);
+    CreateCommand(level.commands_servers_ports, "teleport", "function", ::TeleportCommand, ["default_help_two_players"]);
+    CreateCommand(level.commands_servers_ports, "norecoil", "function", ::NoRecoilCommand, ["default_help_one_player"]);
+    CreateCommand(level.commands_servers_ports, "invisible", "function", ::InvisibleCommand, ["default_help_one_player"]);
+    CreateCommand(level.commands_servers_ports, "wallhack", "function", ::WallhackCommand, ["default_help_one_player"]);
 
     // Specific server(s) text commands
     CreateCommand(["27016", "27017"], "rules", "text", ["Do not camp", "Do not spawnkill", "Do not disrespect other players"]);
@@ -65,12 +65,13 @@ CreateCommand(serverPorts, commandName, commandType, commandValue, commandHelp)
         if (IsDefined(commandHelp))
         {
             commandHelpMessage = commandHelp;
+            commandHelpString = commandHelp[0];
             
-            if (commandHelp == "default_help_one_player")
+            if (commandHelpString == "default_help_one_player")
             {
                 commandHelpMessage = ["Example: " + level.commands_prefix + commandName + " me", "Example: " + level.commands_prefix + commandName + " Resxt"];
             }
-            else if (commandHelp == "default_help_two_players")
+            else if (commandHelpString == "default_help_two_players")
             {
                 commandHelpMessage = ["Example: " + level.commands_prefix + commandName + " me Resxt", "Example: " + level.commands_prefix + commandName + " Resxt me", "Example: " + level.commands_prefix + commandName + " Resxt Eldor"];
             }
