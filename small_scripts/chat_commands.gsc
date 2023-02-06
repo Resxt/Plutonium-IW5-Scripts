@@ -37,9 +37,9 @@ InitCommands()
     CreateCommand(level.commands_servers_ports, "map", "function", ::ChangeMapCommand, ["Example: " + level.commands_prefix + "map mp_dome"]);
     CreateCommand(level.commands_servers_ports, "mode", "function", ::ChangeModeCommand, ["Example: " + level.commands_prefix + "mode FFA_default"]);
     CreateCommand(level.commands_servers_ports, "mapmode", "function", ::ChangeMapAndModeCommand, ["Example: " + level.commands_prefix + "mapmode mp_seatown TDM_default"]);
-    CreateCommand(level.commands_servers_ports, "changeteam", "function", ::ChangeTeamCommand, ["Example: " + level.commands_prefix + "changeteam Resxt"]);
-    CreateCommand(level.commands_servers_ports, "teleport", "function", ::TeleportCommand, ["Example: " + level.commands_prefix + "teleport me Eldor", "Example: " + level.commands_prefix + "teleport Eldor me", "Example: " + level.commands_prefix + "teleport Eldor Rektinator"]);
-    CreateCommand(level.commands_servers_ports, "norecoil", "function", ::NoRecoilCommand, ["Example: " + level.commands_prefix + "norecoil Resxt"]);
+    CreateCommand(level.commands_servers_ports, "changeteam", "function", ::ChangeTeamCommand, "default_help_one_player");
+    CreateCommand(level.commands_servers_ports, "teleport", "function", ::TeleportCommand, "default_help_two_players");
+    CreateCommand(level.commands_servers_ports, "norecoil", "function", ::NoRecoilCommand, "default_help_one_player");
 
     // Specific server(s) text commands
     CreateCommand(["27016", "27017"], "rules", "text", ["Do not camp", "Do not spawnkill", "Do not disrespect other players"]);
@@ -62,7 +62,18 @@ CreateCommand(serverPorts, commandName, commandType, commandValue, commandHelp)
 
         if (IsDefined(commandHelp))
         {
-            level.commands[serverPort][commandName]["help"] = commandHelp;
+            commandHelpMessage = commandHelp;
+            
+            if (commandHelp == "default_help_one_player")
+            {
+                commandHelpMessage = ["Example: " + level.commands_prefix + commandName + " me", "Example: " + level.commands_prefix + commandName + " Resxt"];
+            }
+            else if (commandHelp == "default_help_two_players")
+            {
+                commandHelpMessage = ["Example: " + level.commands_prefix + commandName + " me Resxt", "Example: " + level.commands_prefix + commandName + " Resxt me", "Example: " + level.commands_prefix + commandName + " Resxt Eldor"];
+            }
+
+            level.commands[serverPort][commandName]["help"] = commandHelpMessage;
         }
     
         if (commandType == "text")
