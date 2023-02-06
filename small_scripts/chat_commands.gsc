@@ -332,21 +332,14 @@ TeleportPlayer(teleportedPlayerName, destinationPlayerName)
     {
         name = names[i];
 
-        if (name == "me")
-        {
-            players = AddElementToArray(players, self);
-        }
-        else
-        {
-            player = FindPlayerByName(name);
+        player = FindPlayerByName(name);
 
-            if (!IsDefined(player))
-            {
-                return PlayerDoesNotExistError(name);
-            }
-
-            players = AddElementToArray(players, player);
+        if (!IsDefined(player))
+        {
+            return PlayerDoesNotExistError(name);
         }
+
+        players = AddElementToArray(players, player);
     }
 
     players[0] SetOrigin(players[1].origin);
@@ -404,6 +397,11 @@ PlayerDoesNotExistError(playerName)
 
 FindPlayerByName(name)
 {
+    if (name == "me")
+    {
+        return self;
+    }
+    
     foreach (player in level.players)
     {
         if (ToLower(player.name) == ToLower(name))
@@ -437,9 +435,19 @@ ToggleStatus(commandName, commandDisplayName, player)
 
 GetStatus(commandName, player)
 {
-    if (!IsDefined(player.chat_commands["status"][commandName]))
+    if (!IsDefined(player.chat_commands)) // avoid undefined errors in the console
     {
-        return false;
+        player.chat_commands = [];
+    }
+
+    if (!IsDefined(player.chat_commands["status"])) // avoid undefined errors in the console
+    {
+        player.chat_commands["status"] = [];
+    }
+
+    if (!IsDefined(player.chat_commands["status"][commandName])) // status is set to OFF/false by default
+    {
+        SetStatus(commandName, player, false);
     }
 
     return player.chat_commands["status"][commandName];
