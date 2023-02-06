@@ -39,6 +39,7 @@ InitCommands()
     CreateCommand(level.commands_servers_ports, "mapmode", "function", ::ChangeMapAndModeCommand, ["Example: " + level.commands_prefix + "mapmode mp_seatown TDM_default"]);
     CreateCommand(level.commands_servers_ports, "changeteam", "function", ::ChangeTeamCommand, ["Example: " + level.commands_prefix + "changeteam Resxt"]);
     CreateCommand(level.commands_servers_ports, "teleport", "function", ::TeleportCommand, ["Example: " + level.commands_prefix + "teleport me Eldor", "Example: " + level.commands_prefix + "teleport Eldor me", "Example: " + level.commands_prefix + "teleport Eldor Rektinator"]);
+    CreateCommand(level.commands_servers_ports, "norecoil", "function", ::NoRecoilCommand, ["Example: " + level.commands_prefix + "norecoil Resxt"]);
 
     // Specific server(s) text commands
     CreateCommand(["27016", "27017"], "rules", "text", ["Do not camp", "Do not spawnkill", "Do not disrespect other players"]);
@@ -269,6 +270,21 @@ TeleportCommand(args)
     }
 }
 
+NoRecoilCommand(args)
+{
+    if (args.size < 1)
+    {
+        return NotEnoughArgsError(1);
+    }
+
+    error = ToggleNoRecoil(args[0]);
+
+    if (IsDefined(error))
+    {
+        return error;
+    }
+}
+
 
 
 /* Logic functions section */
@@ -336,6 +352,28 @@ TeleportPlayer(teleportedPlayerName, destinationPlayerName)
     players[0] SetOrigin(players[1].origin);
 }
 
+ToggleNoRecoil(playerName)
+{
+    player = FindPlayerByName(playerName);
+
+    if (!IsDefined(player))
+    {
+        return PlayerDoesNotExistError(playerName);
+    }
+
+    recoilModifier = 100;
+
+    if (IsDefined(player.recoilscale) && player.recoilscale == 100)
+    {
+        recoilModifier = 0;
+    }
+
+    player maps\mp\_utility::setrecoilscale( recoilModifier, recoilModifier );
+    player.recoilscale = recoilModifier;
+
+    ToggleStatus("no_recoil", "No Recoil", player);
+}
+
 
 
 /* Error functions section */
@@ -373,6 +411,43 @@ FindPlayerByName(name)
             return player;
         }
     }
+}
+
+ToggleStatus(commandName, commandDisplayName, player)
+{
+    SetStatus(commandName, player, !GetStatus(commandName, player));
+
+    statusMessage = "^2ON";
+    
+    if (!GetStatus(commandName, player))
+    {
+        statusMessage = "^1OFF";
+    }
+
+    if (self.name == player.name)
+    {
+        self TellPlayer(["You changed your " + commandDisplayName + " status to " + statusMessage], 1);
+    }
+    else
+    {
+        self TellPlayer([player.name + " " + commandDisplayName + " status changed to " + statusMessage], 1);
+        player TellPlayer([self.name + " changed your " + commandDisplayName + " status to " + statusMessage], 1);
+    }
+}
+
+GetStatus(commandName, player)
+{
+    if (!IsDefined(player.chat_commands["status"][commandName]))
+    {
+        return false;
+    }
+
+    return player.chat_commands["status"][commandName];
+}
+
+SetStatus(commandName, player, status)
+{
+    player.chat_commands["status"][commandName] = status;
 }
 
 AddElementToArray(array, element)
