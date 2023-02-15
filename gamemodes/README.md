@@ -14,7 +14,8 @@ Every game the weapons and explosives are randomized from the list but every pla
 
 I recommend playing this on [custom maps](https://forum.plutonium.pw/category/27/mw3-modding-releases-resources) that have no/less invisible walls.  
 In my experience most COD 4 maps don't have a lot of invisible walls so you can jump and bunny hop everywhere on the map.  
-You might also want to configure the script and your game further, for example by lowering the health to avoid hitmarkers.
+You might also want to configure the script and your game further, for example by lowering the health to avoid hitmarkers.  
+I recommend using my [jump_monitor](https://github.com/Resxt/Plutonium-IW5-Scripts/tree/main/small_scripts#jump_monitorgsc) script with this gamemode, it was made to be used with this.
 
 This was made for FFA/Deathmatch. Some modifications are necessary to get it working in other modes.  
 Bot Warfare bots are supported but the code for it is disabled by default to avoid getting any error in case Bot Warfare isn't installed.  
@@ -68,6 +69,7 @@ Every 5 kills your explosion radius slightly increases and every 15 kills the co
 This mode could also work really well without high jump and high speed, it's just how I created it to make it a "modded" mode.  
 If you play it with high jump/speed I recommend playing this on [custom maps](https://forum.plutonium.pw/category/27/mw3-modding-releases-resources) that have no/less invisible walls.  
 In my experience most COD 4 maps don't have a lot of invisible walls so you can jump and bunny hop everywhere on the map.  
+I recommend using my [jump_monitor](https://github.com/Resxt/Plutonium-IW5-Scripts/tree/main/small_scripts#jump_monitorgsc) script with this gamemode, it was made to be used with this.
 
 This was made for FFA/Deathmatch. Some modifications are necessary to get it working in other modes.  
 Bot Warfare bots are supported but the code for it is disabled by default to avoid getting any error in case Bot Warfare isn't installed.  
