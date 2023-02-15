@@ -6,6 +6,10 @@ Simple drag and drop scripts
 
 Prevent players from hardscoping
 
+## autoassign_team.gsc
+
+Whenever a player connects directly autoassign him to a team, skipping the team selection menu
+
 ## change_team_names.gsc
 
 Change the team names to custom names depending on the game mode
