@@ -69,6 +69,16 @@ Gives perks to a player whenever he spawns if he doesn't already have them.
 This script has been written to give sleight of hand and quickdraw even if you have other perks like overkill (carry two primary weapons).  
 You can find the list of perks and pro perks in [perktable.csv](https://github.com/chxseh/MW3-GSC-Dump/blob/e9445976df9f91451fa6e5dc3cb4663390aafcec/_raw-files/mp/perktable.csv)
 
+## jump_monitor.gsc
+
+Whenever players touch the ground they have 7.5s to jump or they will explode. At 50% of this time a beeping sound starts playing.  
+Whenever the player jumps the timer stops and is only starting again from the beginning when he touches the ground.  
+This script is really useful if you have a high jump server and you want to make sure that players don't stay on the ground for too long and also if you have bots it ensures they don't stay on the ground most of the game to make games dynamic.  
+
+Bot Warfare bots are supported but the code for it is disabled by default to avoid getting any error in case Bot Warfare isn't installed.  
+To enable support for Bot Warfare simply uncomment the lines where it says `Uncomment if using Bot Warfare`.  
+This will monitor bots individually and make them jump every `level.jump_monitor_bot_wait_time` second after they touch the ground.
+
 ## hardcore_tweaks.gsc
 
 The hardcore mode replaces some game functionalities like enabling friendly fire or disabling killcams.  
