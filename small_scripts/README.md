@@ -108,3 +108,16 @@ The speeds were tested/monitored with this [speed meter script from quaK](https:
 
 Display a text to a player when it's the first time he spawns in a match.  
 This can be used to display a specific rule, a warning or just a message.
+
+## welcome_message.gsc
+
+Display a welcome message to a player (MW2 typewriter style) when it's the first time he spawns in a match.  
+This has an optional sound, optionally up to 3 lines of text, an optional icon and an optional glow to the text, all with support for color codes for the text.  
+To change the icon displayed just change the value of `level.welcome_message_icon`. Most icons can be found on [this list](https://www.itsmods.com/forum/Thread-Tutorial-MW3-Cardicon-list.html).  
+Some sounds can be found by searching the dump with certain keywords such as [playsound](https://github.com/plutoniummod/iw5-scripts/search?q=playsound) and [playlocalsound](https://github.com/plutoniummod/iw5-scripts/search?q=playlocalsound)
+
+<details>
+  <summary>Image</summary>
+  
+  ![image](images/welcome_message.png)
+</details>
