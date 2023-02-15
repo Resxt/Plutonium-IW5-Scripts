@@ -5,6 +5,21 @@
 Recreation of the Modern Warfare 3 All or Nothing gamemode based on [the wiki](https://callofduty.fandom.com/wiki/All_or_Nothing_(Game_Mode)#Call_of_Duty:_Modern_Warfare_3).  
 The bots won't use their throwing knives often and when they do they will use preset grenade spots, they won't directly aim at a player.
 
+## chaos.gsc
+
+A custom modded mode I created that's pretty much.. chaos. The best way to understand what it is to try it with bots.  
+It's a mode with high jump, high speed where everyone has a weapon that shoots explosive projectiles such as AC-130, Stinger or RPG rockets and so on.  
+Every 25 kills you get a new weapon with a new explosive to shoot. It's made so that every time you progress you get a weapon that shoots slower and has less bullets but your projecticles cause bigger explosions.  
+Every game the weapons and explosives are randomized from the list but every player has the same progression, just like a gun game.  
+
+I recommend playing this on [custom maps](https://forum.plutonium.pw/category/27/mw3-modding-releases-resources) that have no/less invisible walls.  
+In my experience most COD 4 maps don't have a lot of invisible walls so you can jump and bunny hop everywhere on the map.  
+You might also want to configure the script and your game further, for example by lowering the health to avoid hitmarkers.
+
+This was made for FFA/Deathmatch. Some modifications are necessary to get it working in other modes.  
+Bot Warfare bots are supported but the code for it is disabled by default to avoid getting any error in case Bot Warfare isn't installed.  
+To enable support for Bot Warfare simply uncomment the lines where it says `Uncomment if using Bot Warfare`.
+
 ## gun_game.gsc
 
 Recreation of the popular gun game mode with a good level of customization.  
