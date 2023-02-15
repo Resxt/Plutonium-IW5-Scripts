@@ -59,6 +59,21 @@ They weren't even tested so if you add them you will need to do some debug
 - There is no unexpected cases/exceptions handling. For example if you ask for 60 weapons and only want a weapon one time this will create an infinite loop because there are only 51 weapons available
 - Some weapons like the AC-130 could be added in a special category later
 
+## kamikaze.gsc
+
+A custom modded mode I created that's really simple. The best way to understand what it is to try it with friends (or bots).  
+It's a mode with high jump and high speed where everyone has a C4 detonator and needs to run close enough to other players to detonate it and get kills.  
+Every 5 kills your explosion radius slightly increases and every 15 kills the cooldown between each detonation you can do is lowered.
+Every game the weapons and explosives are randomized from the list but every player has the same progression, just like a gun game.  
+
+This mode could also work really well without high jump and high speed, it's just how I created it to make it a "modded" mode.  
+If you play it with high jump/speed I recommend playing this on [custom maps](https://forum.plutonium.pw/category/27/mw3-modding-releases-resources) that have no/less invisible walls.  
+In my experience most COD 4 maps don't have a lot of invisible walls so you can jump and bunny hop everywhere on the map.  
+
+This was made for FFA/Deathmatch. Some modifications are necessary to get it working in other modes.  
+Bot Warfare bots are supported but the code for it is disabled by default to avoid getting any error in case Bot Warfare isn't installed.  
+To enable support for Bot Warfare simply uncomment the lines where it says `Uncomment if using Bot Warfare`.
+
 ## one_in_the_chamber.gsc
 
 Recreation of the Modern Warfare 3 One In The Chamber gamemode with infinite lives.  
