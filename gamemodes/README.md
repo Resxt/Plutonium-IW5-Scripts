@@ -8,7 +8,7 @@ The bots won't use their throwing knives often and when they do they will use pr
 ## chaos.gsc
 
 A custom modded mode I created that's pretty much.. chaos. The best way to understand what it is to try it with bots.  
-It's a mode with high jump, high speed where everyone has a weapon that shoots explosive projectiles such as AC-130, Stinger or RPG rockets and so on.  
+It's a mode with high jump and high speed where everyone has a weapon that shoots explosive projectiles such as AC-130, Stinger or RPG rockets and so on.  
 Every 25 kills you get a new weapon with a new explosive to shoot. It's made so that every time you progress you get a weapon that shoots slower and has less bullets but your projecticles cause bigger explosions.  
 Every game the weapons and explosives are randomized from the list but every player has the same progression, just like a gun game.  
 
