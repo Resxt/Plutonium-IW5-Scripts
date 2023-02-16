@@ -228,6 +228,11 @@ PlayerDoesNotExistError(playerName)
     return ["Player " + playerName + " was not found"];
 }
 
+DvarDoesNotExistError(dvarName)
+{
+    return ["The dvar " + dvarName + " doesn't exist"];
+}
+
 
 
 /* Utils section */
@@ -293,6 +298,12 @@ GetStatus(commandName, player)
 SetStatus(commandName, player, status)
 {
     player.chat_commands["status"][commandName] = status;
+}
+
+DvarIsInitialized(dvarName)
+{
+	result = GetDvar(dvarName);
+	return result != "";
 }
 
 AddElementToArray(array, element)
