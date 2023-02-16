@@ -28,14 +28,24 @@ Also note that this script doesn't provide any command on its own. You must inst
 
 The player affected by the command dies and swaps to the other team.  
 
-Arguments expected: the complete name of a player.  
-Example: `!changteam Resxt`
+| # | Argument | Mandatory |
+|---|---|---|
+| 1 | The name of the player to swap to the other team | :white_check_mark: |
+
+| Examples |
+|---|
+| `!changeteam me` |
+| `!changeteam Resxt` |
 
 ## chat_command_freeze.gsc
 
 Toggles whether the targeted player can move or not.  
 Note that this does not work during the prematch period.  
 Also, if you unfreeze a bot the bot has to die before he starts moving again.
+
+| # | Argument | Mandatory |
+|---|---|---|
+| 1 | The name of the player to freeze/unfreeze | :white_check_mark: |
 
 | Examples |
 |---|
@@ -46,6 +56,10 @@ Also, if you unfreeze a bot the bot has to die before he starts moving again.
 
 Toggles invisibility on the targeted player.  
 Note that this does not make the player invisible to bots in the sense that even if they can't see the player, they will still know his position and shoot him.
+
+| # | Argument | Mandatory |
+|---|---|---|
+| 1 | The name of the player to make invisible/visible | :white_check_mark: |
 
 | Examples |
 |---|
@@ -70,6 +84,10 @@ Note that this does not make the player invisible to bots in the sense that even
 
 Toggles norecoil on the targeted player
 
+| # | Argument | Mandatory |
+|---|---|---|
+| 1 | The name of the player to toggle norecoil for | :white_check_mark: |
+
 | Examples |
 |---|
 | `!norecoil me` |
@@ -79,14 +97,18 @@ Toggles norecoil on the targeted player
 
 The player who runs the command dies.  
 
-Arguments expected: none.  
-Example: `!suicide`
+| Example |
+|---|
+| `!suicide` |
 
 ## chat_command_teleport.gsc
 
-Teleports a player to another
+Teleports a player to the position of another player.
 
-Arguments expected: (1) the name of the player to teleport (2) the name of the player to teleport to.  
+| # | Argument | Mandatory |
+|---|---|---|
+| 1 | The name of the player to teleport | :white_check_mark: |
+| 2 | The name of the player to teleport to | :white_check_mark: |
 
 | Examples |
 |---|
@@ -97,12 +119,18 @@ Arguments expected: (1) the name of the player to teleport (2) the name of the p
 ## chat_command_text_rules.gsc
 
 Prints the server rules in the player's chat.  
-Arguments expected: none.  
-Example: `!rules`
+
+| Example |
+|---|
+| `!rules` |
 
 ## chat_command_wallhack.gsc
 
-Toggles wallhack (red boxes) on the targeted player
+Toggles wallhack (red boxes) on the targeted player.
+
+| # | Argument | Mandatory |
+|---|---|---|
+| 1 | The name of the player to toggle wallhack for | :white_check_mark: |
 
 | Examples |
 |---|
