@@ -24,6 +24,20 @@ Also note that this script doesn't provide any command on its own. You must inst
 - Permissions/ranks to restrict some commands to a certain type of players (admin, VIP etc.)
 - Configurable text colors/accent. As of now the majority of the text will be white
 
+## chat_command_map_mode.gsc
+
+3 related commands in one file:  
+
+- Change map
+- Change mode
+- Change map and mode
+
+| Name | Description | Arguments expected | Example |
+|---|---|---|---|
+| map | Changes the map on the server | (1) the map codename | `!map mp_dome` |
+| mode | Charges a new DSR/mode on the server and restarts the current map | (1) the DSR file name, found in the `admin` folder of your game | `!mode FFA_default` |
+| mapmode | Charges a new DSR/mode on the server and rotates to the requested map | (1) the map codename (2) the DSR file name, found in the `admin` folder of your game | `!mapmode mp_seatown TDM_default` |
+
 ## chat_command_suicide.gsc
 
 The player who runs the command dies.  
