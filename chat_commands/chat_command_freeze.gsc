@@ -48,7 +48,7 @@ ToggleFreeze(playerName)
     }
     else
     {
-        DoFreeze(false);
+        player DoFreeze(false);
         player notify("chat_commands_freeze_off");
     }
 }
@@ -62,7 +62,7 @@ ThreadFreeze()
     {
         self waittill("spawned_player");
 
-        DoFreeze(true);
+        self DoFreeze(true);
     }
 }
 
