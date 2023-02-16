@@ -24,6 +24,13 @@ Also note that this script doesn't provide any command on its own. You must inst
 - Permissions/ranks to restrict some commands to a certain type of players (admin, VIP etc.)
 - Configurable text colors/accent. As of now the majority of the text will be white
 
+## chat_command_suicide.gsc
+
+The player who runs the command dies.  
+
+Arguments expected: none.  
+Example: `!suicide`
+
 ## chat_commands.gsc
 
 The core script that holds the configuration, runs all the chat logic and holds utils function that are shared between all the `chat_command` scripts.
