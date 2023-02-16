@@ -52,6 +52,18 @@ The player who runs the command dies.
 Arguments expected: none.  
 Example: `!suicide`
 
+## chat_command_teleport.gsc
+
+Teleports a player to another
+
+Arguments expected: (1) the name of the player to teleport (2) the name of the player to teleport to.  
+
+| Examples |
+|---|
+| `!teleport me Eldor` |
+| `!teleport Eldor me` |
+| `!teleport Eldor Rektinator` |
+
 ## chat_command_text_rules.gsc
 
 Prints the server rules in the player's chat.  
