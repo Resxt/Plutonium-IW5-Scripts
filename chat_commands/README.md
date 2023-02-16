@@ -15,6 +15,7 @@ Also note that this script doesn't provide any command on its own. You must inst
 - All exceptions are handled with error messages (no commands on the server, not enough arguments, command doesn't exist, command doesn't have any help message, player doesn't exist etc.)
 - A `commands` command that lists all available commands on the server you're on dynamically
 - A `help` command that explains how to use a given command. For example `help map`
+- All commands that require a target work with `me`. Also it doesn't matter how you type the player's name as long as you type the full name.
 - Configurable command prefix. Set to `!` by default
 - A plugin system to easily allow adding/removing commands. Each command has its own GSC file to easily add/remove/review/configure your commands. This also makes contributing by creating a PR to add a command a lot easier
 
