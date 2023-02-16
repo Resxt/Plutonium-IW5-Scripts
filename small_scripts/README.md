@@ -14,31 +14,6 @@ Whenever a player connects directly autoassign him to a team, skipping the team 
 
 Change the team names to custom names depending on the game mode
 
-## chat_commands.gsc
-
-Let players execute commands by typing in the chat.  
-This can be used to display text to the player, for example the server rules or execute GSC code to kill the player or give him a particular weapon for example.  
-Since there is no permission check I would recommend deleting the sensitive commands if you run a public server or don't fully trust the people in your private match.  
-
-This has been created for private matches and servers that don't use IW4MAdmin (or that removed its commands).  
-If you plan on using this with IW4MAdmin's commands enabled you should double check that commands don't overwrite something (or remove them in IW4MAdmin).  
-Note that this has not been tested with IW4MAdmin and is not really meant to run alongside.
-
-:white_check_mark: Features available
-
-- Easy per server (port) commands configuration. You can either pass an array of one server port, or multiple, or the `level.commands_servers_ports` array to easily add a command to one/multiple/all servers
-- Chat text print and functions support
-- All exceptions are handled with error messages (not enough arguments, command doesn't exist, command doesn't have any help message etc.)
-- A commands command that lists all available commands dynamically
-- A help command that explains how to use a given command
-
-:no_entry_sign: Features not available/to add
-
-- Commands aliases
-- Permissions/ranks to restrict some commands to a certain type of players (admin, VIP etc.)
-- A plugin system to easily allow adding/removing possible commands. Each command would have its own GSC file to add/remove on the fly
-- Configurable text colors. As of now every text will be white
-
 ## disable_damages.gsc
 
 Disable melee knifing damage.  
