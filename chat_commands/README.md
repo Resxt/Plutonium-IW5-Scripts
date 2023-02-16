@@ -145,6 +145,19 @@ Prints the server rules in the player's chat.
 |---|
 | `!rules` |
 
+## chat_command_unlimited_ammo.gsc
+
+Toggles unlimited ammo on the targeted player.
+
+| # | Argument | Mandatory |
+|---|---|---|
+| 1 | The name of the player to toggle unlimited ammo for | :white_check_mark: |
+
+| Examples |
+|---|
+| `!unlimitedammo me` |
+| `!unlimitedammo Resxt` |
+
 ## chat_command_wallhack.gsc
 
 Toggles wallhack (red boxes) on the targeted player.
