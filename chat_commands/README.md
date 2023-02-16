@@ -45,6 +45,15 @@ Example: `!changteam Resxt`
 | mode | Charges a new DSR/mode on the server and restarts the current map | (1) the DSR file name, found in the `admin` folder of your game | `!mode FFA_default` |
 | mapmode | Charges a new DSR/mode on the server and rotates to the requested map | (1) the map codename (2) the DSR file name, found in the `admin` folder of your game | `!mapmode mp_seatown TDM_default` |
 
+## chat_command_norecoil.gsc
+
+Toggles norecoil on the targeted player
+
+| Examples |
+|---|
+| `!norecoil me` |
+| `!norecoil Resxt` |
+
 ## chat_command_suicide.gsc
 
 The player who runs the command dies.  
