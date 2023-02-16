@@ -117,14 +117,6 @@ Teleports a player to the position of another player.
 | `!teleport Eldor me` |
 | `!teleport Eldor Rektinator` |
 
-## chat_command_text_rules.gsc
-
-Prints the server rules in the player's chat.  
-
-| Example |
-|---|
-| `!rules` |
-
 ## chat_command_text_help.gsc
 
 Prints how to use the `commands` and the `help command` commands in the player's chat.
@@ -132,6 +124,14 @@ Prints how to use the `commands` and the `help command` commands in the player's
 | Example |
 |---|
 | `!help` |
+
+## chat_command_text_rules.gsc
+
+Prints the server rules in the player's chat.  
+
+| Example |
+|---|
+| `!rules` |
 
 ## chat_command_wallhack.gsc
 
