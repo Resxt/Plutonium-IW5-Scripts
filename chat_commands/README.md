@@ -52,6 +52,19 @@ Note that this does not work during the prematch period.
 | `!freeze me` |
 | `!freeze Resxt` |
 
+## chat_command_god_mode.gsc
+
+Toggles whether the targeted player is in god mode (invincible) or not.  
+
+| # | Argument | Mandatory |
+|---|---|---|
+| 1 | The name of the player to toggle god mode for | :white_check_mark: |
+
+| Examples |
+|---|
+| `!god me` |
+| `!god Resxt` |
+
 ## chat_command_invisible.gsc
 
 Toggles invisibility on the targeted player.  
