@@ -31,6 +31,12 @@ The player who runs the command dies.
 Arguments expected: none.  
 Example: `!suicide`
 
+## chat_command_text_rules.gsc
+
+Prints the server rules in the player's chat.  
+Arguments expected: none.  
+Example: `!rules`
+
 ## chat_commands.gsc
 
 The core script that holds the configuration, runs all the chat logic and holds utils function that are shared between all the `chat_command` scripts.
