@@ -38,6 +38,20 @@ The player affected by the command dies and swaps to the other team.
 | `!changeteam me` |
 | `!changeteam Resxt` |
 
+## chat_command_dvars.gsc
+
+3 related commands in one file:  
+
+- Print server dvar
+- Change server dvar
+- Change client dvar
+
+| Name | Description | Arguments expected | Example |
+|---|---|---|---|
+| getdvar | Prints the (server) dvar value in the player's chat | (1) the dvar name | `!getdvar g_speed` |
+| setdvar | Changes a dvar on the server | (1) the dvar name (2) the new dvar value | `!setdvar jump_height 500` |
+| setclientdvar | Changes a dvar on the targeted player | (1) the name of the player (2) the dvar name (3) the new dvar value | `!setclientdvar Resxt cg_thirdperson 1` |
+
 ## chat_command_freeze.gsc
 
 Toggles whether the targeted player can move or not.  
