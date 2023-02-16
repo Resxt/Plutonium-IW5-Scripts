@@ -125,6 +125,14 @@ Prints the server rules in the player's chat.
 |---|
 | `!rules` |
 
+## chat_command_text_help.gsc
+
+Prints how to use the `commands` and the `help command` commands in the player's chat.
+
+| Example |
+|---|
+| `!help` |
+
 ## chat_command_wallhack.gsc
 
 Toggles wallhack (red boxes) on the targeted player.
