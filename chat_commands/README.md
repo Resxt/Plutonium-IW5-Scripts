@@ -31,6 +31,16 @@ The player affected by the command dies and swaps to the other team.
 Arguments expected: the complete name of a player.  
 Example: `!changteam Resxt`
 
+## chat_command_invisible.gsc
+
+Toggles invisibility on the targeted player.  
+Note that this does not make the player invisible to bots in the sense that even if they can't see the player, they will still know his position and shoot him.
+
+| Examples |
+|---|
+| `!invisible me` |
+| `!invisible Resxt` |
+
 ## chat_command_map_mode.gsc
 
 3 related commands in one file:  
