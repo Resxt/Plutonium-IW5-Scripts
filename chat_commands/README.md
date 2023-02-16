@@ -31,6 +31,17 @@ The player affected by the command dies and swaps to the other team.
 Arguments expected: the complete name of a player.  
 Example: `!changteam Resxt`
 
+## chat_command_freeze.gsc
+
+Toggles whether the targeted player can move or not.  
+Note that this does not work during the prematch period.  
+Also, if you unfreeze a bot the bot has to die before he starts moving again.
+
+| Examples |
+|---|
+| `!freeze me` |
+| `!freeze Resxt` |
+
 ## chat_command_invisible.gsc
 
 Toggles invisibility on the targeted player.  
