@@ -24,6 +24,13 @@ Also note that this script doesn't provide any command on its own. You must inst
 - Permissions/ranks to restrict some commands to a certain type of players (admin, VIP etc.)
 - Configurable text colors/accent. As of now the majority of the text will be white
 
+## chat_command_change_team.gsc
+
+The player affected by the command dies and swaps to the other team.  
+
+Arguments expected: the complete name of a player.  
+Example: `!changteam Resxt`
+
 ## chat_command_map_mode.gsc
 
 3 related commands in one file:  
