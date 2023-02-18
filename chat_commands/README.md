@@ -23,6 +23,7 @@ Also note that this script doesn't provide any command on its own. You must inst
 
 - Commands aliases
 - Permissions/ranks to restrict some commands to a certain type of players (admin, VIP etc.)
+- Support for more target aliases such as "all", "bots" and "humans"
 - Configurable text colors/accent. As of now the majority of the text will be white
 
 ## chat_command_change_team.gsc
