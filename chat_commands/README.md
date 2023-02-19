@@ -160,6 +160,19 @@ Prints the server rules in the player's chat.
 |---|
 | `!rules` |
 
+## chat_command_unfair_aimbot.gsc
+
+Toggles unfair aimbot on the targeted player.
+
+| # | Argument | Mandatory |
+|---|---|---|
+| 1 | The name of the player to toggle unlimited ammo for | :white_check_mark: |
+
+| Examples |
+|---|
+| `!unfairaimbot me` |
+| `!unfairaimbot Resxt` |
+
 ## chat_command_unlimited_ammo.gsc
 
 Toggles unlimited ammo on the targeted player.
