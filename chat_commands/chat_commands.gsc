@@ -306,6 +306,11 @@ DvarIsInitialized(dvarName)
 	return result != "";
 }
 
+TargetIsMyself(targetName)
+{
+    return targetName == "me" || ToLower(targetName) == ToLower(self.name);
+}
+
 AddElementToArray(array, element)
 {
     array[array.size] = element;
