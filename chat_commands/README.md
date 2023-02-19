@@ -94,6 +94,19 @@ Note that this does not make the player invisible to bots in the sense that even
 | `!invisible me` |
 | `!invisible Resxt` |
 
+## chat_command_kill.gsc
+
+The player who runs the command kills the targeted player (no matter if they're in the same team or not)
+
+| # | Argument | Mandatory |
+|---|---|---|
+| 1 | The name of the player to kill | :white_check_mark: |
+
+| Examples |
+|---|
+| `!kill me` |
+| `!kill Resxt` |
+
 ## chat_command_map_mode.gsc
 
 3 related commands in one file:  
