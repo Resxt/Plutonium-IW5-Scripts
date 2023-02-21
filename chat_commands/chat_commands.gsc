@@ -233,6 +233,11 @@ DvarDoesNotExistError(dvarName)
     return ["The dvar " + dvarName + " doesn't exist"];
 }
 
+CamoDoesNotExistError(camoName)
+{
+    return ["The camo " + camoName + " doesn't exist"];
+}
+
 
 
 /* Utils section */
@@ -309,6 +314,76 @@ DvarIsInitialized(dvarName)
 TargetIsMyself(targetName)
 {
     return targetName == "me" || ToLower(targetName) == ToLower(self.name);
+}
+
+GetWeaponNameWithoutCamo(weaponName)
+{
+    return (IsSubStr(weaponName, "_camo") ? GetSubStr(weaponName, 0, weaponName.size - 7) : weaponName);
+}
+
+GetCamoNameFromNameOrIndex(camoNameOrIndex)
+{
+    switch(camoNameOrIndex)
+    {
+        case "none":
+        case "0":
+        return "";
+
+        case "classic":
+        case "1":
+        return "_camo01";
+
+        case "snow":
+        case "2":
+        return "_camo02";
+
+        case "multicam":
+        case "3":
+        return "_camo03";
+
+        case "digitalurban":
+        case "digital urban":
+        case "digital":
+        case "urban":
+        case "4":
+        return "_camo04";
+        
+        case "hex":
+        case "5":
+        return "_camo05";
+
+        case "choco":
+        case "6":
+        return "_camo06";
+
+        case "snake":
+        case "7":
+        return "_camo07";
+
+        case "blue":
+        case "8":
+        return "_camo08";
+
+        case "red":
+        case "9":
+        return "_camo09";
+
+        case "autumn":
+        case "10":
+        return "_camo10";
+
+        case "gold":
+        case "11":
+        return "_camo11";
+
+        case "marine":
+        case "12":
+        return "_camo12";
+
+        case "winter":
+        case "13":
+        return "_camo13";
+    }
 }
 
 AddElementToArray(array, element)
