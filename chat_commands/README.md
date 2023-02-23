@@ -79,7 +79,7 @@ Note that this does not work during the prematch period.
 |---|---|---|---|
 | giveweapon | Gives the specified weapon to the targeted player. Removes the current weapon and plays the switch animation by default | (1) the name of the targeted player (2) the weapon code name (attachments and camos accepted too) | `!giveweapon me iw5_acr_mp_reflex_camo11` |
 | givekillstreak | Gives the specified killstreak to the targeted player | (1) the name of the targeted player (2) the killstreak code name | `!givekillstreak me predator_missile` |
-| givecamo | Changes the camo of all the primary weapons the targeted player has to the specified camo. Plays the switch animation by default | (1) the name of the player (2) the name of the camo or its index | `!givecamo me gold` |
+| givecamo | Changes the camo of all the primary weapons the targeted player has to the specified camo. Plays the switch animation by default | (1) the name of the targeted player (2) the name of the camo or its index | `!givecamo me gold` |
 
 You can check [this](https://www.itsmods.com/forum/Thread-Tutorial-MW3-weapons-perks-camos-attachments.html) to get weapon/killstreak/camos names.  
 
