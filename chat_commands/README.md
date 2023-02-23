@@ -85,7 +85,7 @@ You can check [this](https://www.itsmods.com/forum/Thread-Tutorial-MW3-weapons-p
 
 Note that for weapons you need to add `_mp` at the end of the weapon name.  
 So for example if the website says `iw5_scar` you would replace it with `iw5_scar_mp`.  
-This is only for the weapon name, if you add an attachment and/or a camo `mp` would still be at the same position, it wouldn't be at the end.  
+This is only for the weapon name, if you add an attachment and/or a camo `_mp` would still be at the same position, it wouldn't be at the end.  
 For example a SCAR-L with an acog sight and the red camo would be `iw5_scar_mp_acog_camo09`.  
 
 The format is `<weapon_name>_<attachment>_<camo>`.  
