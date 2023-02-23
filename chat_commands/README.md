@@ -67,6 +67,44 @@ Note that this does not work during the prematch period.
 | `!freeze me` |
 | `!freeze Resxt` |
 
+## chat_command_give.gsc
+
+3 related commands in one file:  
+
+- Give weapon
+- Give killstreak
+- Give camo
+
+| Name | Description | Arguments expected | Example |
+|---|---|---|---|
+| giveweapon | Gives the specified weapon to the targeted player. Removes the current weapon and plays the switch animation by default | (1) the name of the targeted player (2) the weapon code name (attachments and camos accepted too) | `!giveweapon me iw5_acr_mp_reflex_camo11` |
+| givekillstreak | Gives the specified killstreak to the targeted player | (1) the name of the targeted player (2) the killstreak code name | `!givekillstreak me predator_missile` |
+| givecamo | Changes the camo of all the primary weapons the targeted player has to the specified camo. Plays the switch animation by default | (1) the name of the player (2) the name of the camo or its index | `!givecamo me gold` |
+
+You can check [this](https://www.itsmods.com/forum/Thread-Tutorial-MW3-weapons-perks-camos-attachments.html) to get weapon/killstreak/camos names.  
+
+Note that for weapons you need to add `_mp` at the end of the weapon name.  
+So for example if the website says `iw5_scar` you would replace it with `iw5_scar_mp`.  
+This is only for the weapon name, if you add an attachment and/or a camo `mp` would still be at the same position, it wouldn't be at the end.  
+For example a SCAR-L with an acog sight and the red camo would be `iw5_scar_mp_acog_camo09`.  
+
+The format is `<weapon_name>_<attachment>_<camo>`.  
+
+Note that default snipers scope are considered as attachments.  
+You can find the list of sniper scopes by taking a look at the `GetDefaultWeaponScope` function of my [gun game script](https://github.com/Resxt/Plutonium-IW5-Scripts/blob/main/gamemodes/gun_game.gsc).  
+
+If you add multiple attachments then you need to respect an order that entirely depends on the weapon and attachments.  
+It would be too long to explain so I would recommend simply not bothering with multiple attachments or taking a look at the `FixReversedAttachments` function of my [gun game script](https://github.com/Resxt/Plutonium-IW5-Scripts/blob/main/gamemodes/gun_game.gsc)
+
+| More examples |
+|---|
+| `!giveweapon me iw5_fad_mp` |
+| `!giveweapon me iw5_ak74u_mp_reflexsmg_camo11` |
+| `!giveweapon Resxt iw5_cheytac_mp_cheytacscope_camo08` |
+| `!givecamo me red` |
+| `!givecamo me none` |
+| `!givecamo Resxt 11` |
+
 ## chat_command_god_mode.gsc
 
 Toggles whether the targeted player is in god mode (invincible) or not.  
