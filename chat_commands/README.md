@@ -5,13 +5,17 @@ This can be used to display text to the player, for example the server rules or 
 This has been created for private games or servers that aren't running IW4MAdmin and want to have some commands.  
 This hasn't been tested on a server running IW4MAdmin so I highly recommend doing some testing on a private server if you want to use both.  
 
-**[IMPORTANT]** Installing `chat_commands.gsc` is **mandatory** to make the commands work as this is the core of this whole system and all the command scripts depend on it.  
+## chat_commands.gsc
+
+The core script that holds the configuration, runs all the chat logic and holds utils function that are shared between all the `chat_command` scripts.  
+**[IMPORTANT]** Installing it is **mandatory** to make the commands work as this is the core of this whole system and all the command scripts depend on it.  
 Also note that this script doesn't provide any command on its own. You must install at least one command script to be able to use commands. Otherwise it will always say that you don't have any command.
 
-:white_check_mark: Features available
+### Main features
 
 - Easy per server (port) commands configuration. You can either pass an array of one server port, or multiple, or the `level.commands_servers_ports` array to easily add a command to one/multiple/all servers
 - Chat text print and functions support
+- Optional permissions level system to restrict commands to players with a certain permission level (disabled by default)
 - All exceptions are handled with error messages (no commands on the server, not enough arguments, command doesn't exist, command doesn't have any help message, player doesn't exist etc.)
 - A `commands` command that lists all available commands on the server you're on dynamically
 - A `help` command that explains how to use a given command. For example `help map`
@@ -19,12 +23,40 @@ Also note that this script doesn't provide any command on its own. You must inst
 - Configurable command prefix. Set to `!` by default
 - A plugin system to easily allow adding/removing commands. Each command has its own GSC file to easily add/remove/review/configure your commands. This also makes contributing by creating a PR to add a command a lot easier
 
-:no_entry_sign: Features not available/to add
+### Dvars
 
-- Commands aliases
-- Permissions/ranks to restrict some commands to a certain type of players (admin, VIP etc.)
-- Support for more target aliases such as "all", "bots" and "humans"
-- Configurable text colors/accent. As of now the majority of the text will be white
+Here are the dvars you can configure:
+  
+| Name | Description | Default value | Accepted values |
+|---|---|---|---|
+| cc_debug | Toggle whether the script is in debug mode or not. This is used to print players GUID in the console when they connect | 0 | 0 or 1 |
+| cc_permission_enabled | Toggle whether the permission system is enabled or not. If it's disabled any player can run any available | 0 | 0 or 1 |
+| cc_permission_mode | Changes whether the permission dvars values are names or guids | name | name or guid |
+| cc_permission_default | The default permission level players who aren't found in the permission dvars will be granted | 1 | Any plain number from 0 to `cc_permission_max` |
+| cc_permission_max | The maximum/most elevated permission level | 4 | Any plain number above 0 |
+| cc_permission_0 | A list of names or guids of players who will be granted the permission level 0 when connecting (no access to any command) | "" | Names or guids (depending on `cc_permission_mode`). Each value is separated with a colon (:) |
+| cc_permission_1 | A list of names or guids of players who will be granted the permission level 1 when connecting  | "" | Names or guids (depending on `cc_permission_mode`). Each value is separated with a colon (:) |
+| cc_permission_2 | A list of names or guids of players who will be granted the permission level 2 when connecting  | "" | Names or guids (depending on `cc_permission_mode`). Each value is separated with a colon (:) |
+| cc_permission_3 | A list of names or guids of players who will be granted the permission level 3 when connecting  | "" | Names or guids (depending on `cc_permission_mode`). Each value is separated with a colon (:) |
+| cc_permission_4 | A list of names or guids of players who will be granted the permission level 4 when connecting  | "" | Names or guids (depending on `cc_permission_mode`). Each value is separated with a colon (:) |
+
+### Configuration
+
+Below is an example CFG showing how each dvars can be configured.  
+The values you see are the default values that will be used if you don't set a dvar.  
+
+```c
+set cc_debug 0
+set cc_permission_enabled 0
+set cc_permission_mode "name"
+set cc_permission_default 1
+set cc_permission_max 4
+set cc_permission_0 ""
+set cc_permission_1 ""
+set cc_permission_2 ""
+set cc_permission_3 ""
+set cc_permission_4 ""
+```
 
 ## chat_command_change_team.gsc
 
@@ -249,7 +281,3 @@ Toggles wallhack (red boxes) on the targeted player.
 |---|
 | `!wallhack me` |
 | `!wallhack Resxt` |
-
-## chat_commands.gsc
-
-The core script that holds the configuration, runs all the chat logic and holds utils function that are shared between all the `chat_command` scripts.

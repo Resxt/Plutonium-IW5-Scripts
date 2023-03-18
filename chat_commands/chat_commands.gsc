@@ -20,13 +20,31 @@ Main()
 
 InitChatCommands()
 {
-    level.commands = []; // don't touch
-    level.commands_prefix = "!"; // the symbol to type before the command name in the chat. Only one character is supported. The slash (/) symbol won't work normally as it's reserved by the game. If you use the slash (/) you will need to type double slash in the game
-    level.commands_servers_ports = ["27016", "27017", "27018"]; // an array of the ports of all your servers you want to have the script running on. This is useful to easily pass this array as first arg of CreateCommand to have the command on all your servers
-    level.commands_no_commands_message = ["^1No commands found", "You either ^1didn't add any chat_command file ^7to add a new command ^1or ^7there are ^1no command configured on this port", "chat_commands.gsc is ^1just the base system. ^7It doesn't provide any command on its own", "Also ^1make sure the ports are configured properly ^7in the CreateCommand function of your command file(s)"]; // the lines to print in the chat when the server doesn't have any command added
-    level.commands_no_commands_wait = 6; // time to wait between each line in <level.commands_no_commands_message> when printing that specific message in the chat
+    InitChatCommandsDvars();
 
+    level.chat_commands = []; // don't touch
+    level.chat_commands["prefix"] = "!"; // the symbol to type before the command name in the chat. Only one character is supported. The slash (/) symbol won't work normally as it's reserved by the game. If you use the slash (/) you will need to type double slash in the game
+    level.chat_commands["ports"] = ["27016", "27017", "27018"]; // an array of the ports of all your servers you want to have the script running on. This is useful to easily pass this array as first arg of CreateCommand to have the command on all your servers
+    level.chat_commands["no_commands_message"] = ["^1No commands found", "You either ^1didn't add any chat_command file ^7to add a new command ^1or ^7there are ^1no command configured on this port", "chat_commands.gsc is ^1just the base system. ^7It doesn't provide any command on its own", "Also ^1make sure the ports are configured properly ^7in the CreateCommand function of your command file(s)"]; // the lines to print in the chat when the server doesn't have any command added
+    level.chat_commands["no_commands_wait"] = 6; // time to wait between each line in <level.chat_commands["no_commands_message"]> when printing that specific message in the chat
+
+    level thread OnPlayerConnect();
     level thread ChatListener();
+}
+
+InitChatCommandsDvars()
+{
+    SetDvarIfNotInitialized("cc_debug", 0);
+    
+    SetDvarIfNotInitialized("cc_permission_enabled", 0);
+    SetDvarIfNotInitialized("cc_permission_mode", "name");
+    SetDvarIfNotInitialized("cc_permission_default", 1);
+    SetDvarIfNotInitialized("cc_permission_max", 4);
+
+    for (i = 0; i <= GetDvarInt("cc_permission_max"); i++)
+    {
+        SetDvarIfNotInitialized("cc_permission_" + i, "");
+    }
 }
 
 
@@ -38,9 +56,10 @@ InitChatCommands()
 <commandName> the name of the command, this is what players will type in the chat
 <commandType> the type of the command: <text> is for arrays of text to display text in the player's chat and <function> is to execute a function
 <commandValue> when <commandType> is "text" this is an array of lines to print in the chat. When <commandType> is "function" this is a function pointer (a reference to a function)
-<commandHelp> an array of the lines to print when typing the help command in the chat followed by a command name. You can also pass an array of one preset string to have it auto generated, for example: ["default_help_one_player"] 
+<commandMinimumPermission> (optional, if no value is provided then anyone who's permission level is default or above can run the command) the minimum permission level required to run this command. For example if this is set to 3 then any user with permission level 3 or 4 will be able to run this command
+<commandHelp> (optional) an array of the lines to print when typing the help command in the chat followed by a command name. You can also pass an array of one preset string to have it auto generated, for example: ["default_help_one_player"] 
 */
-CreateCommand(serverPorts, commandName, commandType, commandValue, commandHelp)
+CreateCommand(serverPorts, commandName, commandType, commandValue, commandMinimumPermission, commandHelp)
 {
     foreach (serverPort in serverPorts)
     {
@@ -53,11 +72,11 @@ CreateCommand(serverPorts, commandName, commandType, commandValue, commandHelp)
             
             if (commandHelpString == "default_help_one_player")
             {
-                commandHelpMessage = ["Example: " + level.commands_prefix + commandName + " me", "Example: " + level.commands_prefix + commandName + " Resxt"];
+                commandHelpMessage = ["Example: " + level.chat_commands["prefix"] + commandName + " me", "Example: " + level.chat_commands["prefix"] + commandName + " Resxt"];
             }
             else if (commandHelpString == "default_help_two_players")
             {
-                commandHelpMessage = ["Example: " + level.commands_prefix + commandName + " me Resxt", "Example: " + level.commands_prefix + commandName + " Resxt me", "Example: " + level.commands_prefix + commandName + " Resxt Eldor"];
+                commandHelpMessage = ["Example: " + level.chat_commands["prefix"] + commandName + " me Resxt", "Example: " + level.chat_commands["prefix"] + commandName + " Resxt me", "Example: " + level.chat_commands["prefix"] + commandName + " Resxt Eldor"];
             }
 
             level.commands[serverPort][commandName]["help"] = commandHelpMessage;
@@ -70,6 +89,15 @@ CreateCommand(serverPorts, commandName, commandType, commandValue, commandHelp)
         else if (commandType == "function")
         {
             level.commands[serverPort][commandName]["function"] = commandValue;
+        }
+
+        if (IsDefined(commandMinimumPermission))
+        {
+            level.commands[serverPort][commandName]["permission"] = commandMinimumPermission;
+        }
+        else
+        {
+            level.commands[serverPort][commandName]["permission"] = GetDvarInt("cc_permission_default");
         }
     }
 }
@@ -84,13 +112,19 @@ ChatListener()
     {
         level waittill("say", message, player);
 
-        if (message[0] != level.commands_prefix) // For some reason checking for the buggy character doesn't work so we start at the second character if the first isn't the command prefix
+        if (message[0] != level.chat_commands["prefix"]) // For some reason checking for the buggy character doesn't work so we start at the second character if the first isn't the command prefix
         {
             message = GetSubStr(message, 1); // Remove the random/buggy character at index 0, get the real message
         }
 
-        if (message[0] != level.commands_prefix) // If the message doesn't start with the command prefix
+        if (message[0] != level.chat_commands["prefix"]) // If the message doesn't start with the command prefix
         {
+            continue; // stop
+        }
+
+        if (PermissionIsEnabled() && player GetPlayerPermissionLevel() == 0)
+        {
+            player thread TellPlayer(InsufficientPermissionError(0), 1);
             continue; // stop
         }
 
@@ -105,14 +139,31 @@ ChatListener()
 
         if (IsDefined(level.commands[GetDvar("net_port")]))
         {
-            if (command == level.commands_prefix + "commands") // commands command
+            if (command == level.chat_commands["prefix"] + "commands") // commands command
             {
-                player thread TellPlayer(GetArrayKeys(level.commands[GetDvar("net_port")]), 2, true);
+                if (GetDvarInt("cc_permission_enabled"))
+                {
+                    playerCommands = [];
+
+                    foreach (commandName in GetArrayKeys(level.commands[GetDvar("net_port")]))
+                    {
+                        if (PlayerHasSufficientPermissions(player, level.commands[GetDvar("net_port")][commandName]["permission"]))
+                        {
+                            playerCommands = AddElementToArray(playerCommands, commandName);
+                        }
+                    }
+
+                    player thread TellPlayer(playerCommands, 2, true);
+                }
+                else
+                {
+                    player thread TellPlayer(GetArrayKeys(level.commands[GetDvar("net_port")]), 2, true);
+                }
             }
             else
             {
                 // help command
-                if (command == level.commands_prefix + "help" && !IsDefined(level.commands[GetDvar("net_port")]["help"]) || command == level.commands_prefix + "help" && IsDefined(level.commands[GetDvar("net_port")]["help"]) && args.size >= 1)
+                if (command == level.chat_commands["prefix"] + "help" && !IsDefined(level.commands[GetDvar("net_port")]["help"]) || command == level.chat_commands["prefix"] + "help" && IsDefined(level.commands[GetDvar("net_port")]["help"]) && args.size >= 1)
                 {
                     if (args.size < 1)
                     {
@@ -124,15 +175,22 @@ ChatListener()
 
                         if (IsDefined(commandValue))
                         {
-                            commandHelp = commandValue["help"];
-
-                            if (IsDefined(commandHelp))
+                            if (!PermissionIsEnabled() || PlayerHasSufficientPermissions(player, commandValue["permission"]))
                             {
-                                player thread TellPlayer(commandHelp, 1.5);
+                                commandHelp = commandValue["help"];
+
+                                if (IsDefined(commandHelp))
+                                {
+                                    player thread TellPlayer(commandHelp, 1.5);
+                                }
+                                else
+                                {
+                                    player thread TellPlayer(CommandHelpDoesNotExistError(args[0]), 1);
+                                }
                             }
                             else
                             {
-                                player thread TellPlayer(CommandHelpDoesNotExistError(args[0]), 1);
+                                player thread TellPlayer(InsufficientPermissionError(player GetPlayerPermissionLevel(), args[0], commandValue["permission"]), 1.5);
                             }
                         }
                         else
@@ -156,18 +214,25 @@ ChatListener()
 
                     if (IsDefined(commandValue))
                     {
-                        if (commandValue["type"] == "text")
+                        if (!PermissionIsEnabled() || PlayerHasSufficientPermissions(player, commandValue["permission"]))
                         {
-                            player thread TellPlayer(commandValue["text"], 2);
-                        }
-                        else if (commandValue["type"] == "function")
-                        {
-                            error = player [[commandValue["function"]]](args);
-
-                            if (IsDefined(error))
+                            if (commandValue["type"] == "text")
                             {
-                                player thread TellPlayer(error, 1.5);
+                                player thread TellPlayer(commandValue["text"], 2);
                             }
+                            else if (commandValue["type"] == "function")
+                            {
+                                error = player [[commandValue["function"]]](args);
+
+                                if (IsDefined(error))
+                                {
+                                    player thread TellPlayer(error, 1.5);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            player thread TellPlayer(InsufficientPermissionError(player GetPlayerPermissionLevel(), commandName, commandValue["permission"]), 1.5);
                         }
                     }
                     else
@@ -179,7 +244,7 @@ ChatListener()
         }
         else
         {
-            player thread TellPlayer(level.commands_no_commands_message, level.commands_no_commands_wait, false);
+            player thread TellPlayer(level.chat_commands["no_commands_message"], level.chat_commands["no_commands_wait"], false);
         }
     }
 }
@@ -192,7 +257,7 @@ TellPlayer(messages, waitTime, isCommand)
 
         if (IsDefined(isCommand) && isCommand)
         {
-            message = level.commands_prefix + message;
+            message = level.chat_commands["prefix"] + message;
         }
 
         self tell(message);
@@ -206,16 +271,60 @@ TellPlayer(messages, waitTime, isCommand)
 
 
 
+/* Player section */
+
+OnPlayerConnect()
+{
+    for(;;)
+    {
+		level waittill("connected", player);
+
+        if (player IsBot())
+        {
+            continue; // stop
+        }
+
+        if (!IsDefined(player.pers["chat_commands"]))
+        {
+            player.pers["chat_commands"] = [];
+
+            if (DebugIsOn())
+            {
+                Print("GUID of " + player.name + ": " + player.guid);
+            }
+        }
+
+        player SetPlayerPermissionLevel(player GetPlayerPermissionLevelFromDvar());
+    }
+}
+
+
+
 /* Error functions section */
 
 CommandDoesNotExistError(commandName)
 {
-    return ["The command " + commandName + " doesn't exist", "Type " + level.commands_prefix + "commands to get a list of commands"];
+    return ["The command " + commandName + " doesn't exist", "Type " + level.chat_commands["prefix"] + "commands to get a list of commands"];
 }
 
 CommandHelpDoesNotExistError(commandName)
 {
     return ["The command " + commandName + " doesn't have any help message"];
+}
+
+InsufficientPermissionError(playerPermissionLevel, commandName, requiredPermissionLevel)
+{
+    if (playerPermissionLevel == 0)
+    {
+        return ["You don't have the permissions to run any command"];
+    }
+    
+    return ["Access to the ^5" + commandName + " ^7command refused", "Your permission level is ^5" + playerPermissionLevel + " ^7and the minimum permission level for this command is ^5" + requiredPermissionLevel];
+}
+
+InvalidPermissionLevelError(requestedPermissionLevel)
+{
+    return ["^5" + requestedPermissionLevel + " ^7is not a valid permission level", "Permission levels range from ^50 ^7to ^5" + GetDvarInt("cc_permission_max")];
 }
 
 NotEnoughArgsError(minimumArgs)
@@ -282,33 +391,101 @@ ToggleStatus(commandName, commandDisplayName, player)
 
 GetStatus(commandName, player)
 {
-    if (!IsDefined(player.chat_commands)) // avoid undefined errors in the console
+    if (!IsDefined(player.pers["chat_commands"])) // avoid undefined errors in the console
     {
-        player.chat_commands = [];
+        player.pers["chat_commands"] = [];
     }
 
-    if (!IsDefined(player.chat_commands["status"])) // avoid undefined errors in the console
+    if (!IsDefined(player.pers["chat_commands"]["status"])) // avoid undefined errors in the console
     {
-        player.chat_commands["status"] = [];
+        player.pers["chat_commands"]["status"] = [];
     }
 
-    if (!IsDefined(player.chat_commands["status"][commandName])) // status is set to OFF/false by default
+    if (!IsDefined(player.pers["chat_commands"]["status"][commandName])) // status is set to OFF/false by default
     {
         SetStatus(commandName, player, false);
     }
 
-    return player.chat_commands["status"][commandName];
+    return player.pers["chat_commands"]["status"][commandName];
 }
 
 SetStatus(commandName, player, status)
 {
-    player.chat_commands["status"][commandName] = status;
+    player.pers["chat_commands"]["status"][commandName] = status;
+}
+
+GetPlayerPermissionLevelFromDvar()
+{
+    for (dvarIndex = GetDvarInt("cc_permission_max"); dvarIndex > 0; dvarIndex--)
+    {
+        dvarName = "cc_permission_" + dvarIndex;
+
+        foreach (value in StrTok(GetDvar(dvarName), ":"))
+        {
+            if (GetDvar("cc_permission_mode") == "name")
+            {
+                if (ToLower(value) == ToLower(self.name))
+                {
+                    return dvarIndex;
+                }
+            }
+            else
+            {
+                if (value == self.guid)
+                {
+                    return dvarIndex;
+                }
+            }
+        }
+    }
+
+    return GetDvarInt("cc_permission_default");
+}
+
+GetPlayerPermissionLevel()
+{
+    return self.pers["chat_commands"]["permission_level"];
+}
+
+SetPlayerPermissionLevel(newPermissionLevel)
+{
+    self.pers["chat_commands"]["permission_level"] = newPermissionLevel;
+}
+
+PlayerHasSufficientPermissions(player, targetedPermissionLevel)
+{
+    playerPermissionLevel = player GetPlayerPermissionLevel();
+
+    if (playerPermissionLevel == 0)
+    {
+        return false;
+    }
+
+    if (!IsDefined(targetedPermissionLevel))
+    {
+        return true;
+    }
+
+    return playerPermissionLevel >= targetedPermissionLevel;
 }
 
 DvarIsInitialized(dvarName)
 {
 	result = GetDvar(dvarName);
 	return result != "";
+}
+
+SetDvarIfNotInitialized(dvarName, dvarValue)
+{
+	if (!DvarIsInitialized(dvarName))
+    {
+        SetDvar(dvarName, dvarValue);
+    }
+}
+
+IsBot()
+{
+    return IsDefined(self.pers["isBot"]) && self.pers["isBot"];
 }
 
 TargetIsMyself(targetName)
@@ -390,4 +567,14 @@ AddElementToArray(array, element)
 {
     array[array.size] = element;
     return array;
+}
+
+DebugIsOn()
+{
+    return GetDvarInt("cc_debug");
+}
+
+PermissionIsEnabled()
+{
+    return GetDvarInt("cc_permission_enabled");
 }
