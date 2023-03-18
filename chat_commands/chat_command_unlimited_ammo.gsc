@@ -2,7 +2,7 @@
 
 Init()
 {
-    CreateCommand(level.commands_servers_ports, "unlimitedammo", "function", ::UnlimitedAmmoCommand, ["default_help_one_player"]);
+    CreateCommand(level.chat_commands["ports"], "unlimitedammo", "function", ::UnlimitedAmmoCommand, 3, ["default_help_one_player"]);
 }
 
 
