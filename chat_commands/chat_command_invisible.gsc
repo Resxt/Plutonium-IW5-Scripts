@@ -2,7 +2,7 @@
 
 Init()
 {
-    CreateCommand(level.commands_servers_ports, "invisible", "function", ::InvisibleCommand, ["default_help_one_player"]);
+    CreateCommand(level.chat_commands["ports"], "invisible", "function", ::InvisibleCommand, 3, ["default_help_one_player"]);
 }
 
 
