@@ -2,7 +2,7 @@
 
 Init()
 {
-    CreateCommand(level.commands_servers_ports, "freeze", "function", ::FreezeCommand, ["default_help_one_player"]);
+    CreateCommand(level.chat_commands["ports"], "freeze", "function", ::FreezeCommand, 3, ["default_help_one_player"]);
 }
 
 
