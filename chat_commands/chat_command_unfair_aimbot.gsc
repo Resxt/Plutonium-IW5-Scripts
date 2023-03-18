@@ -2,7 +2,7 @@
 
 Init()
 {
-    CreateCommand(level.commands_servers_ports, "unfairaimbot", "function", ::UnfairAimbotCommand, ["default_help_one_player"]);
+    CreateCommand(level.chat_commands["ports"], "unfairaimbot", "function", ::UnfairAimbotCommand, 4, ["default_help_one_player"]);
 }
 
 
