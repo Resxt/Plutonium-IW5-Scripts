@@ -53,7 +53,7 @@ To enable support for Bot Warfare simply uncomment the lines where it says `Unco
 
 - Use dvars instead of GSC arrays
 - Configure the weight of each weapon type
-- Only FFA is supported. Support for some game modes like TDM and Infected could be adde
+- Only FFA is supported. Support for some game modes like TDM and Infected could be added
 - These attachments aren't supported: grenade launcher, shotgun, variable scope.  
 They weren't even tested so if you add them you will need to do some debug
 - The stinger isn't supported. A GSC script from another source could give support for player lock-on
