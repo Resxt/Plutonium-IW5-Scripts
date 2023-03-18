@@ -2,7 +2,7 @@
 
 Init()
 {
-    CreateCommand(level.commands_servers_ports, "norecoil", "function", ::NoRecoilCommand, ["default_help_one_player"]);
+    CreateCommand(level.chat_commands["ports"], "norecoil", "function", ::NoRecoilCommand, 3, ["default_help_one_player"]);
 }
 
 
