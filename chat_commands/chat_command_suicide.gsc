@@ -2,7 +2,7 @@
 
 Init()
 {
-    CreateCommand(["27016", "27017"], "suicide", "function", ::SuicideCommand);
+    CreateCommand(level.chat_commands["ports"], "suicide", "function", ::SuicideCommand, 1);
 }
 
 
