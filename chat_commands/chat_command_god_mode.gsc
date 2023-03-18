@@ -2,7 +2,7 @@
 
 Init()
 {
-    CreateCommand(level.commands_servers_ports, "god", "function", ::GodModeCommand, ["default_help_one_player"]);
+    CreateCommand(level.chat_commands["ports"], "god", "function", ::GodModeCommand, 3, ["default_help_one_player"]);
 }
 
 
