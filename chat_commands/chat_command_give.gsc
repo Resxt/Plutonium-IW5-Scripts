@@ -2,9 +2,9 @@
 
 Init()
 {
-    CreateCommand(level.commands_servers_ports, "giveweapon", "function", ::GiveWeaponCommand);
-    CreateCommand(level.commands_servers_ports, "givekillstreak", "function", ::GiveKillstreakCommand);
-    CreateCommand(level.commands_servers_ports, "givecamo", "function", ::GiveCamoCommand);
+    CreateCommand(level.chat_commands["ports"], "giveweapon", "function", ::GiveWeaponCommand, 2);
+    CreateCommand(level.chat_commands["ports"], "givekillstreak", "function", ::GiveKillstreakCommand, 3);
+    CreateCommand(level.chat_commands["ports"], "givecamo", "function", ::GiveCamoCommand, 2);
 }
 
 
