@@ -2,7 +2,7 @@
 
 Init()
 {
-    CreateCommand(level.commands_servers_ports, "kill", "function", ::KillCommand, ["default_help_one_player"]);
+    CreateCommand(level.chat_commands["ports"], "kill", "function", ::KillCommand, 3, ["default_help_one_player"]);
 }
 
 
