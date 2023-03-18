@@ -2,9 +2,9 @@
 
 Init()
 {
-    CreateCommand(level.commands_servers_ports, "getdvar", "function", ::GetDvarCommand);
-    CreateCommand(level.commands_servers_ports, "setdvar", "function", ::SetDvarCommand);
-    CreateCommand(level.commands_servers_ports, "setclientdvar", "function", ::SetPlayerDvarCommand);
+    CreateCommand(level.chat_commands["ports"], "getdvar", "function", ::GetDvarCommand, 2);
+    CreateCommand(level.chat_commands["ports"], "setdvar", "function", ::SetDvarCommand, 4);
+    CreateCommand(level.chat_commands["ports"], "setclientdvar", "function", ::SetPlayerDvarCommand, 4);
 }
 
 
