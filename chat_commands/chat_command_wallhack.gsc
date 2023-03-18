@@ -2,7 +2,7 @@
 
 Init()
 {
-    CreateCommand(level.commands_servers_ports, "wallhack", "function", ::WallhackCommand, ["default_help_one_player"]);
+    CreateCommand(level.chat_commands["ports"], "wallhack", "function", ::WallhackCommand, 4, ["default_help_one_player"]);
 }
 
 
