@@ -71,6 +71,10 @@ The player affected by the command dies and swaps to the other team.
 | `!changeteam me` |
 | `!changeteam Resxt` |
 
+| Permission level |
+|---|
+| 3 |
+
 ## chat_command_dvars.gsc
 
 3 related commands in one file:  
@@ -79,11 +83,11 @@ The player affected by the command dies and swaps to the other team.
 - Change server dvar
 - Change client dvar
 
-| Name | Description | Arguments expected | Example |
-|---|---|---|---|
-| getdvar | Prints the (server) dvar value in the player's chat | (1) the dvar name | `!getdvar g_speed` |
-| setdvar | Changes a dvar on the server | (1) the dvar name (2) the new dvar value | `!setdvar jump_height 500` |
-| setclientdvar | Changes a dvar on the targeted player | (1) the name of the player (2) the dvar name (3) the new dvar value | `!setclientdvar Resxt cg_thirdperson 1` |
+| Name | Description | Arguments expected | Example | Permission level |
+|---|---|---|---|---|
+| getdvar | Prints the (server) dvar value in the player's chat | (1) the dvar name | `!getdvar g_speed` | 2 |
+| setdvar | Changes a dvar on the server | (1) the dvar name (2) the new dvar value | `!setdvar jump_height 500` | 4 |
+| setclientdvar | Changes a dvar on the targeted player | (1) the name of the player (2) the dvar name (3) the new dvar value | `!setclientdvar Resxt cg_thirdperson 1` | 4 |
 
 ## chat_command_freeze.gsc
 
@@ -99,6 +103,10 @@ Note that this does not work during the prematch period.
 | `!freeze me` |
 | `!freeze Resxt` |
 
+| Permission level |
+|---|
+| 3 |
+
 ## chat_command_give.gsc
 
 3 related commands in one file:  
@@ -107,11 +115,11 @@ Note that this does not work during the prematch period.
 - Give killstreak
 - Give camo
 
-| Name | Description | Arguments expected | Example |
-|---|---|---|---|
-| giveweapon | Gives the specified weapon to the targeted player. Removes the current weapon and plays the switch animation by default | (1) the name of the targeted player (2) the weapon code name (attachments and camos accepted too) | `!giveweapon me iw5_acr_mp_reflex_camo11` |
-| givekillstreak | Gives the specified killstreak to the targeted player | (1) the name of the targeted player (2) the killstreak code name | `!givekillstreak me predator_missile` |
-| givecamo | Changes the camo of all the primary weapons the targeted player has to the specified camo. Plays the switch animation by default | (1) the name of the targeted player (2) the name of the camo or its index | `!givecamo me gold` |
+| Name | Description | Arguments expected | Example | Permission level |
+|---|---|---|---|---|
+| giveweapon | Gives the specified weapon to the targeted player. Removes the current weapon and plays the switch animation by default | (1) the name of the targeted player (2) the weapon code name (attachments and camos accepted too) | `!giveweapon me iw5_acr_mp_reflex_camo11` | 2 |
+| givekillstreak | Gives the specified killstreak to the targeted player | (1) the name of the targeted player (2) the killstreak code name | `!givekillstreak me predator_missile` | 3 |
+| givecamo | Changes the camo of all the primary weapons the targeted player has to the specified camo. Plays the switch animation by default | (1) the name of the targeted player (2) the name of the camo or its index | `!givecamo me gold` | 2 |
 
 You can check [this](https://www.itsmods.com/forum/Thread-Tutorial-MW3-weapons-perks-camos-attachments.html) to get weapon/killstreak/camos names.  
 
@@ -150,6 +158,10 @@ Toggles whether the targeted player is in god mode (invincible) or not.
 | `!god me` |
 | `!god Resxt` |
 
+| Permission level |
+|---|
+| 3 |
+
 ## chat_command_invisible.gsc
 
 Toggles invisibility on the targeted player.  
@@ -164,6 +176,10 @@ Note that this does not make the player invisible to bots in the sense that even
 | `!invisible me` |
 | `!invisible Resxt` |
 
+| Permission level |
+|---|
+| 3 |
+
 ## chat_command_kill.gsc
 
 The player who runs the command kills the targeted player (no matter if they're in the same team or not)
@@ -177,6 +193,10 @@ The player who runs the command kills the targeted player (no matter if they're 
 | `!kill me` |
 | `!kill Resxt` |
 
+| Permission level |
+|---|
+| 3 |
+
 ## chat_command_map_mode.gsc
 
 3 related commands in one file:  
@@ -185,11 +205,11 @@ The player who runs the command kills the targeted player (no matter if they're 
 - Change mode
 - Change map and mode
 
-| Name | Description | Arguments expected | Example |
-|---|---|---|---|
-| map | Changes the map on the server | (1) the map codename | `!map mp_dome` |
-| mode | Charges a new DSR/mode on the server and restarts the current map | (1) the DSR file name, found in the `admin` folder of your game | `!mode FFA_default` |
-| mapmode | Charges a new DSR/mode on the server and rotates to the requested map | (1) the map codename (2) the DSR file name, found in the `admin` folder of your game | `!mapmode mp_seatown TDM_default` |
+| Name | Description | Arguments expected | Example | Permission level |
+|---|---|---|---|---|
+| map | Changes the map on the server | (1) the map codename | `!map mp_dome` | 4 |
+| mode | Charges a new DSR/mode on the server and restarts the current map | (1) the DSR file name, found in the `admin` folder of your game | `!mode FFA_default` | 4 |
+| mapmode | Charges a new DSR/mode on the server and rotates to the requested map | (1) the map codename (2) the DSR file name, found in the `admin` folder of your game | `!mapmode mp_seatown TDM_default` | 4 |
 
 ## chat_command_norecoil.gsc
 
@@ -204,6 +224,10 @@ Toggles norecoil on the targeted player
 | `!norecoil me` |
 | `!norecoil Resxt` |
 
+| Permission level |
+|---|
+| 3 |
+
 ## chat_command_suicide.gsc
 
 The player who runs the command dies.  
@@ -211,6 +235,10 @@ The player who runs the command dies.
 | Example |
 |---|
 | `!suicide` |
+
+| Permission level |
+|---|
+| 1 |
 
 ## chat_command_teleport.gsc
 
@@ -227,6 +255,10 @@ Teleports a player to the position of another player.
 | `!teleport Eldor me` |
 | `!teleport Eldor Rektinator` |
 
+| Permission level |
+|---|
+| 2 |
+
 ## chat_command_text_help.gsc
 
 Prints how to use the `commands` and the `help command` commands in the player's chat.
@@ -235,6 +267,10 @@ Prints how to use the `commands` and the `help command` commands in the player's
 |---|
 | `!help` |
 
+| Permission level |
+|---|
+| 1 |
+
 ## chat_command_text_rules.gsc
 
 Prints the server rules in the player's chat.  
@@ -242,6 +278,10 @@ Prints the server rules in the player's chat.
 | Example |
 |---|
 | `!rules` |
+
+| Permission level |
+|---|
+| 1 |
 
 ## chat_command_unfair_aimbot.gsc
 
@@ -256,6 +296,10 @@ Toggles unfair aimbot on the targeted player.
 | `!unfairaimbot me` |
 | `!unfairaimbot Resxt` |
 
+| Permission level |
+|---|
+| 4 |
+
 ## chat_command_unlimited_ammo.gsc
 
 Toggles unlimited ammo on the targeted player.
@@ -269,6 +313,10 @@ Toggles unlimited ammo on the targeted player.
 | `!unlimitedammo me` |
 | `!unlimitedammo Resxt` |
 
+| Permission level |
+|---|
+| 3 |
+
 ## chat_command_wallhack.gsc
 
 Toggles wallhack (red boxes) on the targeted player.
@@ -281,3 +329,7 @@ Toggles wallhack (red boxes) on the targeted player.
 |---|
 | `!wallhack me` |
 | `!wallhack Resxt` |
+
+| Permission level |
+|---|
+| 4 |
