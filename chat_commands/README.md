@@ -13,7 +13,7 @@ Also note that this script doesn't provide any command on its own. You must inst
 
 ### Main features
 
-- Easy per server (port) commands configuration. You can either pass an array of one server port, or multiple, or the `level.commands_servers_ports` array to easily add a command to one/multiple/all servers
+- Easy per server (port) commands configuration. You can either pass an array of one server port, or multiple, or the `level.chat_commands["ports"]` array to easily add a command to one/multiple/all servers
 - Chat text print and functions support
 - Optional permissions level system to restrict commands to players with a certain permission level (disabled by default)
 - All exceptions are handled with error messages (no commands on the server, not enough arguments, command doesn't exist, command doesn't have any help message, player doesn't exist etc.)
