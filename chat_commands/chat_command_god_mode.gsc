@@ -75,6 +75,19 @@ DoGodMode(enabled)
         health = GetDvarInt("scr_player_maxhealth");
     }
 
+    deadSilencePro = "specialty_falldamage";
+
+    if (enabled && !self maps\mp\_utility::_hasPerk(deadSilencePro)) // if god mode is on and player doesn't have dead silence pro
+    {
+        self maps\mp\_utility::givePerk(deadSilencePro, false); // give dead silence pro
+        self.pers["god_mode_gave_perk"] = true;
+    }
+    else if (!enabled && self maps\mp\_utility::_hasPerk(deadSilencePro) && self.pers["god_mode_gave_perk"]) // if god mode is off and player has dead silence pro and it was given by god mode on
+    {
+        self maps\mp\_utility::_unsetperk(deadSilencePro); // remove dead silence pro
+        self.pers["god_mode_gave_perk"] = false;
+    }
+
     self.maxhealth = health;
     self.health = health;
 }
