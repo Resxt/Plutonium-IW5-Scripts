@@ -2,8 +2,8 @@
 
 Let players execute commands by typing in the chat.  
 This can be used to display text to the player, for example the server rules or execute GSC code, just like console commands.  
-This has been created for private games or servers that aren't running IW4MAdmin and want to have some commands.  
-This hasn't been tested on a server running IW4MAdmin so I highly recommend doing some testing on a private server if you want to use both.  
+This works in private games, on dedicated servers that use [IW4MAdmin](https://github.com/RaidMax/IW4M-Admin) and those that don't.  
+If you do monitor your server with [IW4MAdmin](https://github.com/RaidMax/IW4M-Admin) then make sure to read the [notes section](#notes).
 
 ## chat_commands.gsc
 
@@ -30,6 +30,7 @@ Here are the dvars you can configure:
 | Name | Description | Default value | Accepted values |
 |---|---|---|---|
 | cc_debug | Toggle whether the script is in debug mode or not. This is used to print players GUID in the console when they connect | 0 | 0 or 1 |
+| cc_prefix | The symbol to type before the command name in the chat. Only one character is supported. The `/` symbol won't work normally as it's reserved by the game. If you use the `/` symbol as prefix you will need to type double slash in the game | ! | Any working symbol |
 | cc_permission_enabled | Toggle whether the permission system is enabled or not. If it's disabled any player can run any available | 0 | 0 or 1 |
 | cc_permission_mode | Changes whether the permission dvars values are names or guids | name | name or guid |
 | cc_permission_default | The default permission level players who aren't found in the permission dvars will be granted | 1 | Any plain number from 0 to `cc_permission_max` |
@@ -61,6 +62,7 @@ set cc_permission_4 ""
 ### Notes
 
 - To pass an argument with a space you need to put `'` around it. For example if a player name is `The Moonlight` then you would write `!teleport 'The Moonlight' Resxt`
+- If you use [IW4MAdmin](https://github.com/RaidMax/IW4M-Admin) make sure you have a different commands prefix to avoid conflicts. For example `!` for IW4MAdmin commands and `.` for this script. The commands prefix can be modified by changing the value of the `cc_prefix` dvar. As for [IW4MAdmin](https://github.com/RaidMax/IW4M-Admin), at the time of writing, if you want to change it you'll need to change the value of [CommandPrefix](https://github.com/RaidMax/IW4M-Admin/wiki/Configuration#advanced-configuration)
 
 ## chat_command_change_team.gsc
 

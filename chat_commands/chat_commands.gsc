@@ -23,7 +23,6 @@ InitChatCommands()
     InitChatCommandsDvars();
 
     level.chat_commands = []; // don't touch
-    level.chat_commands["prefix"] = "!"; // the symbol to type before the command name in the chat. Only one character is supported. The slash (/) symbol won't work normally as it's reserved by the game. If you use the slash (/) you will need to type double slash in the game
     level.chat_commands["ports"] = ["27016", "27017", "27018"]; // an array of the ports of all your servers you want to have the script running on. This is useful to easily pass this array as first arg of CreateCommand to have the command on all your servers
     level.chat_commands["no_commands_message"] = ["^1No commands found", "You either ^1didn't add any chat_command file ^7to add a new command ^1or ^7there are ^1no command configured on this port", "chat_commands.gsc is ^1just the base system. ^7It doesn't provide any command on its own", "Also ^1make sure the ports are configured properly ^7in the CreateCommand function of your command file(s)"]; // the lines to print in the chat when the server doesn't have any command added
     level.chat_commands["no_commands_wait"] = 6; // time to wait between each line in <level.chat_commands["no_commands_message"]> when printing that specific message in the chat
@@ -35,6 +34,7 @@ InitChatCommands()
 InitChatCommandsDvars()
 {
     SetDvarIfNotInitialized("cc_debug", 0);
+    SetDvarIfNotInitialized("cc_prefix", "!");
     
     SetDvarIfNotInitialized("cc_permission_enabled", 0);
     SetDvarIfNotInitialized("cc_permission_mode", "name");
@@ -72,11 +72,11 @@ CreateCommand(serverPorts, commandName, commandType, commandValue, commandMinimu
             
             if (commandHelpString == "default_help_one_player")
             {
-                commandHelpMessage = ["Example: " + level.chat_commands["prefix"] + commandName + " me", "Example: " + level.chat_commands["prefix"] + commandName + " Resxt"];
+                commandHelpMessage = ["Example: " + GetDvar("cc_prefix") + commandName + " me", "Example: " + GetDvar("cc_prefix") + commandName + " Resxt"];
             }
             else if (commandHelpString == "default_help_two_players")
             {
-                commandHelpMessage = ["Example: " + level.chat_commands["prefix"] + commandName + " me Resxt", "Example: " + level.chat_commands["prefix"] + commandName + " Resxt me", "Example: " + level.chat_commands["prefix"] + commandName + " Resxt Eldor"];
+                commandHelpMessage = ["Example: " + GetDvar("cc_prefix") + commandName + " me Resxt", "Example: " + GetDvar("cc_prefix") + commandName + " Resxt me", "Example: " + GetDvar("cc_prefix") + commandName + " Resxt Eldor"];
             }
 
             level.commands[serverPort][commandName]["help"] = commandHelpMessage;
@@ -112,12 +112,12 @@ ChatListener()
     {
         level waittill("say", message, player);
 
-        if (message[0] != level.chat_commands["prefix"]) // For some reason checking for the buggy character doesn't work so we start at the second character if the first isn't the command prefix
+        if (message[0] != GetDvar("cc_prefix")) // For some reason checking for the buggy character doesn't work so we start at the second character if the first isn't the command prefix
         {
             message = GetSubStr(message, 1); // Remove the random/buggy character at index 0, get the real message
         }
 
-        if (message[0] != level.chat_commands["prefix"]) // If the message doesn't start with the command prefix
+        if (message[0] != GetDvar("cc_prefix")) // If the message doesn't start with the command prefix
         {
             continue; // stop
         }
@@ -158,7 +158,7 @@ ChatListener()
 
         if (IsDefined(level.commands[GetDvar("net_port")]))
         {
-            if (command == level.chat_commands["prefix"] + "commands") // commands command
+            if (command == GetDvar("cc_prefix") + "commands") // commands command
             {
                 if (GetDvarInt("cc_permission_enabled"))
                 {
@@ -182,7 +182,7 @@ ChatListener()
             else
             {
                 // help command
-                if (command == level.chat_commands["prefix"] + "help" && !IsDefined(level.commands[GetDvar("net_port")]["help"]) || command == level.chat_commands["prefix"] + "help" && IsDefined(level.commands[GetDvar("net_port")]["help"]) && args.size >= 1)
+                if (command == GetDvar("cc_prefix") + "help" && !IsDefined(level.commands[GetDvar("net_port")]["help"]) || command == GetDvar("cc_prefix") + "help" && IsDefined(level.commands[GetDvar("net_port")]["help"]) && args.size >= 1)
                 {
                     if (args.size < 1)
                     {
@@ -276,7 +276,7 @@ TellPlayer(messages, waitTime, isCommand)
 
         if (IsDefined(isCommand) && isCommand)
         {
-            message = level.chat_commands["prefix"] + message;
+            message = GetDvar("cc_prefix") + message;
         }
 
         self tell(message);
@@ -323,7 +323,7 @@ OnPlayerConnect()
 
 CommandDoesNotExistError(commandName)
 {
-    return ["The command " + commandName + " doesn't exist", "Type " + level.chat_commands["prefix"] + "commands to get a list of commands"];
+    return ["The command " + commandName + " doesn't exist", "Type " + GetDvar("cc_prefix") + "commands to get a list of commands"];
 }
 
 CommandHelpDoesNotExistError(commandName)
