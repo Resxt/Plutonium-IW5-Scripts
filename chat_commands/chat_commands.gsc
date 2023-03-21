@@ -131,10 +131,29 @@ ChatListener()
         commandArray = StrTok(message, " "); // Separate the command by space character. Example: ["!map", "mp_dome"]
         command = commandArray[0]; // The command as text. Example: !map
         args = []; // The arguments passed to the command. Example: ["mp_dome"]
+        arg = "";
 
         for (i = 1; i < commandArray.size; i++)
         {
-            args = AddElementToArray(args, commandArray[i]);
+            checkedArg = commandArray[i];
+
+            if (checkedArg[0] != "'" && arg == "")
+            {
+                args = AddElementToArray(args, checkedArg);
+            }
+            else if (checkedArg[0] == "'")
+            {
+                arg = StrTok(checkedArg, "'")[0] + " ";
+            }
+            else if (checkedArg[checkedArg.size - 1] == "'")
+            {
+                args = AddElementToArray(args, (arg + StrTok(checkedArg, "'")[0]));
+                arg = "";
+            }
+            else
+            {
+                arg += (checkedArg + " ");
+            }
         }
 
         if (IsDefined(level.commands[GetDvar("net_port")]))

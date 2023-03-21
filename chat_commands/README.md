@@ -58,6 +58,10 @@ set cc_permission_3 ""
 set cc_permission_4 ""
 ```
 
+### Notes
+
+- To pass an argument with a space you need to put `'` around it. For example if a player name is `The Moonlight` then you would write `!teleport 'The Moonlight' Resxt`
+
 ## chat_command_change_team.gsc
 
 The player affected by the command dies and swaps to the other team.  
