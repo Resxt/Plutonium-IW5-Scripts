@@ -308,7 +308,7 @@ Toggles unfair aimbot on the targeted player.
 
 | # | Argument | Mandatory |
 |---|---|---|
-| 1 | The name of the player to toggle unlimited ammo for | :white_check_mark: |
+| 1 | The name of the player to toggle unfair aimbot for | :white_check_mark: |
 
 | Examples |
 |---|
