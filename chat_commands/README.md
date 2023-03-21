@@ -63,6 +63,7 @@ set cc_permission_4 ""
 
 - To pass an argument with a space you need to put `'` around it. For example if a player name is `The Moonlight` then you would write `!teleport 'The Moonlight' Resxt`
 - If you use [IW4MAdmin](https://github.com/RaidMax/IW4M-Admin) make sure you have a different commands prefix to avoid conflicts. For example `!` for IW4MAdmin commands and `.` for this script. The commands prefix can be modified by changing the value of the `cc_prefix` dvar. As for [IW4MAdmin](https://github.com/RaidMax/IW4M-Admin), at the time of writing, if you want to change it you'll need to change the value of [CommandPrefix](https://github.com/RaidMax/IW4M-Admin/wiki/Configuration#advanced-configuration)
+- If you prefer to display information (error messages, status change etc.) on the player's screen rather than in the chat you can edit the `TellPlayer` function. For this you simply need to change `self tell(message);` to `self IPrintLnBold(message);`
 
 ## chat_command_change_team.gsc
 
