@@ -2,9 +2,9 @@
 
 Init()
 {
-    CreateCommand(level.chat_commands["ports"], "map", "function", ::ChangeMapCommand, 4, ["Example: " + level.chat_commands["prefix"] + "map mp_dome"]);
-    CreateCommand(level.chat_commands["ports"], "mode", "function", ::ChangeModeCommand, 4, ["Example: " + level.chat_commands["prefix"] + "mode FFA_default"]);
-    CreateCommand(level.chat_commands["ports"], "mapmode", "function", ::ChangeMapAndModeCommand, 4, ["Example: " + level.chat_commands["prefix"] + "mapmode mp_seatown TDM_default"]);
+    CreateCommand(level.chat_commands["ports"], "map", "function", ::ChangeMapCommand, 4, ["Example: " + GetDvar("cc_prefix") + "map mp_dome"]);
+    CreateCommand(level.chat_commands["ports"], "mode", "function", ::ChangeModeCommand, 4, ["Example: " + GetDvar("cc_prefix") + "mode FFA_default"]);
+    CreateCommand(level.chat_commands["ports"], "mapmode", "function", ::ChangeMapAndModeCommand, 4, ["Example: " + GetDvar("cc_prefix") + "mapmode mp_seatown TDM_default"]);
 }
 
 
