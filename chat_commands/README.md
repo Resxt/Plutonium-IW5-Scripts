@@ -188,6 +188,23 @@ Note that this does not make the player invisible to bots in the sense that even
 |---|
 | 3 |
 
+## chat_command_kick.gsc
+
+Kicks the targeted player.  
+Note that due to some game limitations you cannot kick the host
+
+| # | Argument | Mandatory |
+|---|---|---|
+| 1 | The name of the player to kick | :white_check_mark: |
+
+| Examples |
+|---|
+| `!kick Resxt` |
+
+| Permission level |
+|---|
+| 4 |
+
 ## chat_command_kill.gsc
 
 The player who runs the command kills the targeted player (no matter if they're in the same team or not)
