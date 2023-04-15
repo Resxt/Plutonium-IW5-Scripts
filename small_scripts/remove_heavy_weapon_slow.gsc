@@ -40,6 +40,7 @@ The move speed scale is reset whenever we switch weapons so we need to re-apply 
 OnPlayerWeaponSwitch()
 {
     self endon("disconnect");
+    self endon("death");
 
     for (;;)
     {
