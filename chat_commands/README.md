@@ -8,8 +8,10 @@ If you do monitor your server with [IW4MAdmin](https://github.com/RaidMax/IW4M-A
 ## chat_commands.gsc
 
 The core script that holds the configuration, runs all the chat logic and holds utils function that are shared between all the `chat_command` scripts.  
-**[IMPORTANT]** Installing it is **mandatory** to make the commands work as this is the core of this whole system and all the command scripts depend on it.  
-Also note that this script doesn't provide any command on its own. You must install at least one command script to be able to use commands. Otherwise it will always say that you don't have any command.
+**[IMPORTANT]** Installing `chat_commands.gsc` is **mandatory** to make the commands work as this is the core of this whole system and all the command scripts depend on it.  
+
+Also note that this script doesn't provide any command on its own.  
+You must install at least one command script to be able to use commands. Otherwise it will always say that you don't have any command.
 
 ### Main features
 
@@ -19,6 +21,7 @@ Also note that this script doesn't provide any command on its own. You must inst
 - All exceptions are handled with error messages (no commands on the server, not enough arguments, command doesn't exist, command doesn't have any help message, player doesn't exist etc.)
 - A `commands` command that lists all available commands on the server you're on dynamically (only lists commands you have access to if the permission system is enabled)
 - A `help` command that explains how to use a given command. For example `help map` (only works on commands you have access to if the permission system is enabled)
+- `alias` and `aliases` commands that list the available aliases for a command. For example `alias godmode` (only works on commands you have access to if the permission system is enabled)
 - All commands that require a target work with `me`. Also it doesn't matter how you type the player's name as long as you type the full name.
 - Configurable command prefix. Set to `!` by default
 - A plugin system to easily allow adding/removing commands. Each command has its own GSC file to easily add/remove/review/configure your commands. This also makes contributing by creating a PR to add a command a lot easier
