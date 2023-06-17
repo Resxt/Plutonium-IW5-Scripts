@@ -2,7 +2,7 @@
 
 Init()
 {
-    CreateCommand(level.chat_commands["ports"], "changeteam", "function", ::ChangeTeamCommand, 3, ["default_help_one_player"]);
+    CreateCommand(level.chat_commands["ports"], "changeteam", "function", ::ChangeTeamCommand, 3, ["default_help_one_player"], ["ct"]);
 }
 
 
