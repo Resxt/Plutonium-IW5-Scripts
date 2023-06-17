@@ -2,7 +2,7 @@
 
 Init()
 {
-    CreateCommand(level.chat_commands["ports"], "kick", "function", ::KickCommand, 4, ["default_help_one_player"]);
+    CreateCommand(level.chat_commands["ports"], "kick", "function", ::KickCommand, 4, ["default_help_one_player"], ["k"]);
 }
 
 
