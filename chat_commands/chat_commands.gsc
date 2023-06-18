@@ -112,7 +112,7 @@ CreateCommand(serverPorts, commandName, commandType, commandValue, commandMinimu
     }
 }
 
-ExecuteCommand(command, args, player)
+ExecuteChatCommand(command, args, player)
 {
     if (command["type"] == "text")
     {
@@ -129,11 +129,11 @@ ExecuteCommand(command, args, player)
     }
 }
 
-TryExecuteCommand(commandValue, commandName, args, player)
+TryExecuteChatCommand(commandValue, commandName, args, player)
 {
     if (!PermissionIsEnabled() || PlayerHasSufficientPermissions(player, commandValue["permission"]))
     {
-        ExecuteCommand(commandValue, args, player);
+        ExecuteChatCommand(commandValue, args, player);
     }
     else
     {
@@ -251,13 +251,35 @@ ChatListener()
                     }
                     else
                     {
+                        originalCommandName = GetCommandNameFromAlias(args[0]);
+
                         if (args[0] == "commands" || args[0] == "help" || args[0] == "aliases" || args[0] == "alias")
                         {
                             player thread TellPlayer(CommandHelpDoesNotExistError(args[0]), 1);
                         }
-                        else
+                        else if (args[0] == originalCommandName) // the command wasn't found while searching by its name and all the commands aliases
                         {
                             player thread TellPlayer(CommandDoesNotExistError(args[0]), 1);
+                        }
+                        else
+                        {
+                            commandHelp = level.commands[GetDvar("net_port")][originalCommandName]["help"];
+
+                            if (IsDefined(commandHelp))
+                            {
+                                if (!PermissionIsEnabled() || PlayerHasSufficientPermissions(player, level.commands[GetDvar("net_port")][originalCommandName]["permission"]))
+                                {
+                                    player thread TellPlayer(commandHelp, 1.5);
+                                }
+                                else
+                                {
+                                    player thread TellPlayer(InsufficientPermissionError(player GetPlayerPermissionLevel(), args[0], level.commands[GetDvar("net_port")][originalCommandName]["permission"]), 1.5);
+                                }
+                            }
+                            else
+                            {
+                                player thread TellPlayer(CommandHelpDoesNotExistError(args[0]), 1);
+                            }
                         }
                     }
                 }
@@ -310,9 +332,17 @@ ChatListener()
 
                             if (IsDefined(commandAliases))
                             {
-                                commandAliases = AddElementToArray(commandAliases, originalCommandName);
-                                
-                                player thread TellPlayer(commandAliases, 1.5);
+
+                                if (!PermissionIsEnabled() || PlayerHasSufficientPermissions(player, level.commands[GetDvar("net_port")][originalCommandName]["permission"]))
+                                {
+                                    commandAliases = AddElementToArray(commandAliases, originalCommandName);
+
+                                    player thread TellPlayer(commandAliases, 1.5);
+                                }
+                                else
+                                {
+                                    player thread TellPlayer(InsufficientPermissionError(player GetPlayerPermissionLevel(), args[0], level.commands[GetDvar("net_port")][originalCommandName]["permission"]), 1.5);
+                                }
                             }
                             else
                             {
@@ -329,7 +359,7 @@ ChatListener()
 
                 if (IsDefined(commandValue)) // try to find the command by its original name
                 {
-                    TryExecuteCommand(commandValue, inputCommandName, args, player);
+                    TryExecuteChatCommand(commandValue, inputCommandName, args, player);
                 }
                 else // try to find the command by one of its aliases
                 {
@@ -341,7 +371,7 @@ ChatListener()
                     }
                     else
                     {
-                        TryExecuteCommand(level.commands[GetDvar("net_port")][originalCommandName], inputCommandName, args, player);
+                        TryExecuteChatCommand(level.commands[GetDvar("net_port")][originalCommandName], inputCommandName, args, player);
                     }
                 }
             }
