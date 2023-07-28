@@ -74,6 +74,8 @@ set cc_permission_4 ""
 Balances the teams so that both teams have a fair amount of players.  
 This also counts bots but most likely doesn't differentiate bots and players.
 
+[Credits](https://github.com/Resxt/Plutonium-IW5-Scripts/issues/2)
+
 | Example |
 |---|
 | `!balanceteams` |
