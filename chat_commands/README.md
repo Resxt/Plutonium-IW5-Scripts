@@ -69,6 +69,19 @@ set cc_permission_4 ""
 - If you use [IW4MAdmin](https://github.com/RaidMax/IW4M-Admin) make sure you have a different commands prefix to avoid conflicts. For example `!` for IW4MAdmin commands and `.` for this script. The commands prefix can be modified by changing the value of the `cc_prefix` dvar. As for [IW4MAdmin](https://github.com/RaidMax/IW4M-Admin), at the time of writing, if you want to change it you'll need to change the value of [CommandPrefix](https://github.com/RaidMax/IW4M-Admin/wiki/Configuration#advanced-configuration)
 - If you prefer to display information (error messages, status change etc.) on the player's screen rather than in the chat you can edit the `TellPlayer` function. For this you simply need to change `self tell(message);` to `self IPrintLnBold(message);`
 
+## chat_command_balance_teams.gsc
+
+Balances the teams so that both teams have a fair amount of players.  
+This also counts bots but most likely doesn't differentiate bots and players.
+
+| Example |
+|---|
+| `!balanceteams` |
+
+| Permission level |
+|---|
+| 3 |
+
 ## chat_command_change_team.gsc
 
 The player affected by the command dies and swaps to the other team.  
