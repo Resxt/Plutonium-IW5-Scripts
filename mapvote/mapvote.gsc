@@ -17,6 +17,8 @@
 
 Init()
 {
+    SetDvarIfNotInitialized("mapvote_enable", true);
+
     if (GetDvarInt("mapvote_enable"))
     {
         replaceFunc(maps\mp\gametypes\_gamelogic::waittillFinalKillcamDone, ::OnKillcamEnd);
@@ -71,6 +73,7 @@ InitDvars()
     SetDvarIfNotInitialized("mapvote_blur_fade_in_time", 2);
     SetDvarIfNotInitialized("mapvote_horizontal_spacing", 75);
     SetDvarIfNotInitialized("mapvote_display_wait_time", 1);
+    SetDvarIfNotInitialized("mapvote_default_rotation_enable", false);
     SetDvarIfNotInitialized("mapvote_default_rotation_maps", "mp_dome:mp_nuked:mp_rust");
     SetDvarIfNotInitialized("mapvote_default_rotation_modes", "TDM_default");
     SetDvarIfNotInitialized("mapvote_default_rotation_min_players", 0);
@@ -594,18 +597,6 @@ OnKillcamEnd()
     return true;
 }
 
-ShouldRotateDefault()
-{
-    humanPlayersCount = GetHumanPlayers().size;
-
-    if (GetDvarInt("mapvote_default_rotation_max_players") > 0 && humanPlayersCount >= GetDvarInt("mapvote_default_rotation_min_players") && humanPlayersCount <= GetDvarInt("mapvote_default_rotation_max_players"))
-    {
-        return true;
-    }
-
-    return false;
-}
-
 RotateDefault()
 {
     DoRotation(GetRandomElementInArray(StrTok(GetDvar("mapvote_default_rotation_modes"), ":")), GetRandomElementInArray(StrTok(GetDvar("mapvote_default_rotation_maps"), ":")));
@@ -620,7 +611,9 @@ DoRotation(modeDsr, mapName)
 
 StartRotation()
 {
-	if (ShouldRotateDefault())
+    humanPlayersCount = GetHumanPlayers().size;
+
+	if (GetDvarInt("mapvote_default_rotation_enable") && humanPlayersCount >= GetDvarInt("mapvote_default_rotation_min_players") && humanPlayersCount <= GetDvarInt("mapvote_default_rotation_max_players"))
 	{
 		RotateDefault();
 	}
