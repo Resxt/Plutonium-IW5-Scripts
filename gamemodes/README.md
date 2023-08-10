@@ -5,6 +5,8 @@
 Recreation of the Modern Warfare 3 All or Nothing gamemode based on [the wiki](https://callofduty.fandom.com/wiki/All_or_Nothing_(Game_Mode)#Call_of_Duty:_Modern_Warfare_3).  
 The bots won't use their throwing knives often and when they do they will use preset grenade spots, they won't directly aim at a player.
 
+To enable support for Bot Warfare simply uncomment the line where it says `Uncomment if using Bot Warfare`.
+
 ## chaos.gsc
 
 A custom modded mode I created that's pretty much.. chaos. The best way to understand what it is to try it with bots.  

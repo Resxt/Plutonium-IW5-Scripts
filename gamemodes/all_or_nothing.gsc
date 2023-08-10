@@ -112,7 +112,7 @@ ReplaceKillstreaks()
 
     if (self IsBot())
 	{
-        self maps\mp\bots\_bot_utility::botGiveLoadout(self.team, "gamemode", false, true);
+        //self maps\mp\bots\_bot_utility::botGiveLoadout(self.team, "gamemode", false, true); // Uncomment if using Bot Warfare
     }
     else
     {
