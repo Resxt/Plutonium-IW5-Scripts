@@ -497,11 +497,26 @@ FindPlayerByName(name)
         return self;
     }
     
+    matchs = 0;
+
     foreach (player in level.players)
     {
-        if (ToLower(player.name) == ToLower(name))
+        if( isSubStr( tolower( player.name), tolower(name ) ))
         {
-            return player;
+            matchs++;
+        }
+    }
+
+    wait 0.05;
+
+    if( matchs == 1)
+    {
+        foreach (player in level.players)
+        {
+            if( isSubStr( tolower( player.name), tolower(name ) ))
+            {
+                return player;
+            }
         }
     }
 }
