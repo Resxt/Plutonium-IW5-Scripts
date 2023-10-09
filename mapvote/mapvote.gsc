@@ -15,10 +15,13 @@
 
 /* Entry point */
 
-Init()
+Main()
 {
     SetDvarIfNotInitialized("mapvote_enable", true);
+}
 
+Init()
+{
     if (GetDvarInt("mapvote_enable"))
     {
         replaceFunc(maps\mp\gametypes\_gamelogic::waittillFinalKillcamDone, ::OnKillcamEnd);
