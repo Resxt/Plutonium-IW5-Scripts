@@ -497,27 +497,30 @@ FindPlayerByName(name)
         return self;
     }
     
-    matchs = 0;
+    potentialPlayersFound = 0;
+    foundPlayer = undefined;
 
     foreach (player in level.players)
     {
-        if( isSubStr( tolower( player.name), tolower(name ) ))
+        if (ToLower(player.name) == ToLower(name)) // if we get an exact match return the player
         {
-            matchs++;
+            return player;
+        }
+
+        if (ToLower(GetSubStr(player.name, 0, name.size)) == ToLower(name)) // found a player who's name starts with the given text
+        {
+            potentialPlayersFound++;
+        }
+
+        if (potentialPlayersFound == 1 && !IsDefined(foundPlayer)) // store the first player we find, since we only return one if and only if it only finds one
+        {
+            foundPlayer = player;
         }
     }
 
-    wait 0.05;
-
-    if( matchs == 1)
+    if (potentialPlayersFound == 1) // we only found one player who's name starts with the given text so it's safe to return the player we found
     {
-        foreach (player in level.players)
-        {
-            if( isSubStr( tolower( player.name), tolower(name ) ))
-            {
-                return player;
-            }
-        }
+        return foundPlayer;
     }
 }
 
