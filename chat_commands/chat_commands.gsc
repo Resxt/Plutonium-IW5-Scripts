@@ -476,6 +476,11 @@ PlayerDoesNotExistError(playerName)
     return ["Player " + playerName + " was not found"];
 }
 
+TeamDoesNotExistError(teamName)
+{
+    return ["Team " + teamName + " was not found"];
+}
+
 DvarDoesNotExistError(dvarName)
 {
     return ["The dvar " + dvarName + " doesn't exist"];
@@ -492,19 +497,81 @@ CamoDoesNotExistError(camoName)
 
 FindPlayerByName(name)
 {
-    if (name == "me")
+    if (ToLower(name) == "me")
     {
         return self;
     }
     
+    potentialPlayersFound = 0;
+    foundPlayer = undefined;
+
     foreach (player in level.players)
     {
-        if (ToLower(player.name) == ToLower(name))
+        if (ToLower(player.name) == ToLower(name)) // if we get an exact match return the player
         {
             return player;
         }
+
+        if (ToLower(GetSubStr(player.name, 0, name.size)) == ToLower(name)) // found a player who's name starts with the given text
+        {
+            potentialPlayersFound++;
+        }
+
+        if (potentialPlayersFound == 1 && !IsDefined(foundPlayer)) // store the first player we find, since we only return one if and only if it only finds one
+        {
+            foundPlayer = player;
+        }
+    }
+
+    if (potentialPlayersFound == 1) // we only found one player who's name starts with the given text so it's safe to return the player we found
+    {
+        return foundPlayer;
     }
 }
+
+
+FindTeamByName(name)
+{
+
+    name = ToLower(name);
+
+    if (name == "me" || name == "friends")
+    {
+        return self.sessionteam;
+    }
+
+    if( name == "allies" && getDvar("g_gametype") != "infect")
+    {   
+        return self.sessionteam;
+    }
+    
+    switch (name)
+    {
+        case "axis":
+        case "inf":
+        case "infected":
+            name = "axis";
+            break;
+        case "allies":
+        case "sur":
+        case "survivors":
+            name = "allies";
+            break;
+        case "enemies":
+            if(self.sessionteam == "allies")
+                name = "axis";
+            else
+                name = "allies";
+            break;
+        default:
+            name = undefined;
+            break;      
+    }
+
+    return name;
+}
+
+
 
 ToggleStatus(commandName, commandDisplayName, player)
 {
