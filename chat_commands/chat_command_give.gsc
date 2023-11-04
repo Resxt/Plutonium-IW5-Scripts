@@ -3,6 +3,7 @@
 Init()
 {
     CreateCommand(level.chat_commands["ports"], "giveweapon", "function", ::GiveWeaponCommand, 2);
+    CreateCommand(level.chat_commands["ports"], "giveweaponteam", "function", ::GiveWeaponTeamCommand, 2);
     CreateCommand(level.chat_commands["ports"], "givekillstreak", "function", ::GiveKillstreakCommand, 3);
     CreateCommand(level.chat_commands["ports"], "givecamo", "function", ::GiveCamoCommand, 2);
 }
@@ -83,6 +84,38 @@ GivePlayerWeapon(targetedPlayerName, weaponName, takeCurrentWeapon, playSwitchAn
     else
     {
         player SetSpawnWeapon(weaponName);
+    }
+}
+
+GiveTeamWeapon(targetedTeamName, weaponName, takeCurrentWeapon, playSwitchAnimation)
+{
+    team = FindTeamByName(targetedTeamName);
+
+    if (!IsDefined(team))
+    {
+        return TeamDoesNotExistError(targetedTeamName);
+    }
+
+    foreach ( p in level.players ) 
+    {
+        if ( p.sessionteam == team )
+        {
+            if (IsDefined(takeCurrentWeapon) && takeCurrentWeapon)
+            {
+                p TakeWeapon(p GetCurrentWeapon());
+            }
+
+            p GiveWeapon(weaponName);
+
+            if (IsDefined(playSwitchAnimation) && playSwitchAnimation)
+            {
+                p SwitchToWeapon(weaponName);
+            }
+            else
+            {
+                p SetSpawnWeapon(weaponName);
+            }
+        }
     }
 }
 
