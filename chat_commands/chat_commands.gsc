@@ -476,6 +476,11 @@ PlayerDoesNotExistError(playerName)
     return ["Player " + playerName + " was not found"];
 }
 
+TeamDoesNotExistError(teamName)
+{
+    return ["Team " + teamName + " was not found"];
+}
+
 DvarDoesNotExistError(dvarName)
 {
     return ["The dvar " + dvarName + " doesn't exist"];
@@ -523,6 +528,50 @@ FindPlayerByName(name)
         return foundPlayer;
     }
 }
+
+
+FindTeamByName(name)
+{
+
+    name = ToLower(name);
+
+    if (name == "me" || name == "friends")
+    {
+        return self.sessionteam;
+    }
+
+    if( name == "allies" && getDvar("g_gametype") != "infect")
+    {   
+        return self.sessionteam;
+    }
+    
+    switch (name)
+    {
+        case "axis":
+        case "inf":
+        case "infected":
+            name = "axis";
+            break;
+        case "allies":
+        case "sur":
+        case "survivors":
+            name = "allies";
+            break;
+        case "enemies":
+            if(self.sessionteam == "allies")
+                name = "axis";
+            else
+                name = "allies";
+            break;
+        default:
+            name = undefined;
+            break;      
+    }
+
+    return name;
+}
+
+
 
 ToggleStatus(commandName, commandDisplayName, player)
 {
