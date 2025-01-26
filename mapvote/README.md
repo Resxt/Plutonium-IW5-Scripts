@@ -81,7 +81,7 @@ Here are some pre-set values if you want to quickly copy/paste something
 |---|---|
 | All base game maps | "Seatown,mp_seatown:Dome,mp_dome:Arkaden,mp_plaza2:Bakaara,mp_mogadishu:Resistance,mp_paris:Downturn,mp_exchange:Bootleg,mp_bootleg:Carbon,mp_carbon:Hardhat,mp_hardhat:Lockdown,mp_alpha:Village,mp_village:Fallen,mp_lambeth:Outpost,mp_radar:Interchange,mp_interchange:Underground,mp_underground:Mission,mp_bravo" |
 | All DLC maps | "Piazza,mp_italy:Liberation,mp_park:Overwatch,mp_overwatch:Black Box,mp_morningwood:Sanctuary,mp_meteora:Foundation,mp_cement:Oasis,mp_qadeem:Terminal,mp_terminal_cls:Decommission,mp_shipbreaker:Off Shore,mp_roughneck:Gulch,mp_moab:Boardwalk,mp_boardwalk:Parish,mp_nola" |
-| All Face Off maps | "Lookout,mp_restrepo_ss:Getaway,mp_hillside_ss:Erosion,mp_courtyard:Aground,mp_aground_ss:Vortex,mp_six_ss:U-Turn,mp_burn_ss:Intersection,mp_crosswalk_ss" |
+| All Face Off maps | "Lookout,mp_restrepo_ss:Getaway,mp_hillside_ss:Erosion,mp_courtyard_ss:Aground,mp_aground_ss:Vortex,mp_six_ss:U-Turn,mp_burn_ss:Intersection,mp_crosswalk_ss" |
 | All Plutonium DLC maps | "Favela,mp_favela:Highrise,mp_highrise:Skidrow,mp_nightshift:Nuketown,mp_nuked:Rust,mp_rust" |
 | Classic modes | "Team Deathmatch,TDM_default:Domination,DOM_default" |
 | Objective modes | "Demolition,DD_default:Headquaters,HQ_default:Capture the Flag,CTF_default" |
