@@ -5,10 +5,14 @@ This can be used to display text to the player, for example the server rules or 
 This works in private games, on dedicated servers that use [IW4MAdmin](https://github.com/RaidMax/IW4M-Admin) and those that don't.  
 If you do monitor your server with [IW4MAdmin](https://github.com/RaidMax/IW4M-Admin) then make sure to read the [notes section](#notes).
 
+- **[IMPORTANT]** For dedicated servers, by default, each command is available on any server listed in the `level.chat_commands["ports"]` array variable declared in `chat_commands.gsc`.  
+If you use a port other than 27016 and 27017 you have to add them manually to this array to be used by any command.  
+If a specific command should only be available on certain server(s) (ports) then edit the CreateCommand function in the command's script to use an array you declare yourself with the port(s) you want
+
 ## chat_commands.gsc
 
 The core script that holds the configuration, runs all the chat logic and holds utils function that are shared between all the `chat_command` scripts.  
-**[IMPORTANT]** Installing `chat_commands.gsc` is **mandatory** to make the commands work as this is the core of this whole system and all the command scripts depend on it.  
+- **[IMPORTANT]** Installing `chat_commands.gsc` is **mandatory** to make the commands work as this is the core of this whole system and all the command scripts depend on it.  
 
 Also note that this script doesn't provide any command on its own.  
 You must install at least one command script to be able to use commands. Otherwise it will always say that you don't have any command.
